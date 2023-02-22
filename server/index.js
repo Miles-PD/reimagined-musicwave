@@ -6,6 +6,9 @@ import { fileURLToPath } from 'url';
 
 import * as dotenv from 'dotenv';
 
+import userRouter from './routes/user.routes.js'
+import albumRouter from './routes/album.routes.js'
+
 // ** configs
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
