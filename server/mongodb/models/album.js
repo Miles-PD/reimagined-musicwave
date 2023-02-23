@@ -1,21 +1,19 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const AlbumSchema = new mongoose.Schema({
+    album_id: {type: String, required: true},
     title: {type: String, required: true},
     artist: {type: String, required: true},
     label: {type: String, required: true},
     genre: {type: String, required: true},
+    khz: {type: Number, required: true},
+    bitrate: {type: Number, required: true},
     numTracks: {type: Number, required: true},
     runtime: {type: Number, required: true},
     parental: {type: Boolean, required: true},
-    img: {type: String, required: true},
-    relDate: {type: String, required: true},
-    khz: {type: [Number], required: true},
-    bitrates: {type: [Number], required: true},
-    copyright: {type: String, required: true},
-    allProperties: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Property' }]
 })
 
-const albumModel = mongoose.model('Album', UserSchema)
+const albumModel = mongoose.model('Album', AlbumSchema)
 
 export default albumModel;
+

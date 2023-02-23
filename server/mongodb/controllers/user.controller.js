@@ -1,4 +1,4 @@
-import User from '../mongodb/models/user.js'
+import User from '../models/user.js'
 
 const getAllUsers = async (req, res) => {}; 
 const createUser = async (req, res) => {};
