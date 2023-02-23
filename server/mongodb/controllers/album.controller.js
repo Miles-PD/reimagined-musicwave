@@ -13,10 +13,12 @@ cloudinary.config({
 })
 
 const getAllAlbums = async (req, res) => {
+
+
     try {
-        console.log('Retrieving all albums from the app-data.albums collection...');
+        console.log('Retrieving all albums from the test collection...');
         console.log(`Using collection: ${Album.collection.name}`);
-        const albums = await Album.find({}).limit(req.query._end)  //find all albums in db
+        const albums = await Album.find({})  //find all albums in db
 
         console.log(`Found ${albums.length} albums`);
 
