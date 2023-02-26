@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 const Category = () => {
 
-    const [albums, setAlbums] = useState<AxiosResponse | null | void>(null);
+    const [albums, setAlbums] = useState<AxiosResponse | null | any | void>(null);
 
     useEffect(() => {
 
@@ -19,6 +19,7 @@ const Category = () => {
 
     }, [])
 
+    //const albumsToDisplay: any = albums?.albums ?? [];
 
 
     return(
@@ -29,8 +30,19 @@ const Category = () => {
             </div>
 
             <div className="flex flex-wrap sm:justify-start justify-center gap-8">
-                {[1,2,3,4,5,6,7,8,9,10].map((album, i) => (
-                    <AlbumCard />
+                {albums && albums?.data.map((album: any) => (
+                    <AlbumCard 
+                        key={album.album_id}
+                        album_id={album.album_id} 
+                        title={album.title} 
+                        artist={album.artist}
+                        label={album.label}
+                        genre={album.genre} 
+                        khz={album.khz} 
+                        bitrate={album.bitrate}
+                        numTracks={album.numTracks}
+                        runtime={album.runtime}
+                         />
                 ))}
             </div>
 
