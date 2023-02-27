@@ -11,7 +11,6 @@ const Category = () => {
 
         const fetchAlbums = async () => {
             const albumData = await axios.get("http://localhost:8080/api/v1/album");
-            console.log(albumData)
             setAlbums(albumData);
         }
 
