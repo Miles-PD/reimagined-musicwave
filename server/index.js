@@ -10,6 +10,7 @@ import albumRouter from './mongodb/routes/album.routes.js'
 // ** configs
 dotenv.config();
 
+
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded());

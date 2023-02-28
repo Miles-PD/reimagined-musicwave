@@ -16,7 +16,6 @@ const getAllAlbums = async (req, res) => {
 
 
     try {
-        console.log('Retrieving all albums from the test collection...');
         console.log(`Using collection: ${Album.collection.name}`);
         const albums = await Album.find({})  //find all albums in db
 

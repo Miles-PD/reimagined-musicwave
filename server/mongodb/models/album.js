@@ -11,6 +11,10 @@ const AlbumSchema = new mongoose.Schema({
     numTracks: {type: Number, required: true},
     runtime: {type: Number, required: true},
     parental: {type: Boolean, required: true},
+    tracks: {
+            trackTitles: [String],
+            trackLengths: [String]
+    }
 }, { collection: 'albums' })
 
 const albumModel = mongoose.model('Album', AlbumSchema)
