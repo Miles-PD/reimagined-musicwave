@@ -71,19 +71,19 @@ const AlbumDetails = () => {
 
             {/* Track listings block*/}
             <div className='overflow-x-hidden min-h-[400px] pt-0 px-0 pb-[160px]'>
-                <div className='mt-6'>
+                <div className='mt-1'>
                     {/* Beginning of header*/}
                     <>
-                        <ul className='list-none m-0 py-0 px-[35px] relative'>
+                        <ul className='list-none m-0 py-0 px-[35px] h-[47px] relative'>
                             <li className='box-border'>
                                 <div className='flex justify-between items-center py-0 px-[15px]'>
                                     {/* Inner details of block*/}
-                                    <div className='flex justify-between box-border items-center self-stretch w-full min-w-0 p-0 relative '>
-                                        <div className='w-full text-[12px] min-w-[35px] max-w-[35px] text-left ml-0  self-center shrink'>#</div>
-                                        <div className='w-full text-[12px] pr-[10px] text-left whitespace-nowrap overflow-hidden text-ellipsis '>TITLE</div>
-                                        <div className='w-full text-[12px] min-w-[200px] max-w-[200px] text-left overflow-hidden text-ellipsis whitespace-nowrap pr-[10px] '>ARTIST</div>
-                                        <div className='w-fill text-[13px] min-w-[100px] max-w-[100px] text-left ml-[120px] shrink'>QUALITY</div>
-                                        <div className='w-fill text-[13px] min-w-[50px] max-w-[50px] text-left shrink'>LENGTH</div>
+                                    <div className='flex justify-between box-border items-center self-stretch w-full min-w-0 min-h-[50px] p-0 relative '>
+                                        <div className='w-full text-[12px] min-w-[35px] max-w-[35px] text-left ml-0  self-center shrink text-lg'>#</div>
+                                        <div className='w-full text-[12px] pr-[10px] text-left whitespace-nowrap overflow-hidden text-ellipsis text-lg'>TITLE</div>
+                                        <div className='w-full text-[12px] min-w-[200px] max-w-[200px] text-left overflow-hidden text-ellipsis whitespace-nowrap pr-[10px] text-lg'>ARTIST</div>
+                                        <div className='w-fill text-[13px] min-w-[100px] max-w-[100px] text-left ml-[120px] shrink text-lg'>QUALITY</div>
+                                        <div className='w-fill text-[13px] min-w-[50px] max-w-[50px] text-left shrink text-lg'>LENGTH</div>
                                         <div className='min-w-[50px] max-w-[50px]'></div>
                                         <div className='min-w-[30px] max-w-[30px]'></div>
 
@@ -98,7 +98,7 @@ const AlbumDetails = () => {
                     <>
                     {albums && albums?.data.map((album: any) => ( 
                         album.tracks.trackTitles.map((title: string, index: number) => (
-                            <TracksListing number={index} title={title} artist={album.artist} length={album.tracks.trackLengths[index]} />
+                            <TracksListing number={index + 1} title={title} artist={album.artist} length={album.tracks.trackLengths[index]} />
                         ))
                     ))}
                     </>
