@@ -31,8 +31,8 @@ const Category = () => {
             <div className="flex flex-wrap sm:justify-start justify-center gap-8">
                 {albums && albums?.data.map((album: any) => (
                     <AlbumCard 
-                        key={album.album_id}
-                        album_id={album.album_id} 
+                        key={album._id}
+                        _id={album._id}
                         title={album.title} 
                         artist={album.artist}
                         label={album.label}

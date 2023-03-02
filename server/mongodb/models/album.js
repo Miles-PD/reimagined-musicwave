@@ -1,7 +1,10 @@
 import mongoose, { Schema } from "mongoose";
 
 const AlbumSchema = new mongoose.Schema({
-    album_id: {type: String, required: true},
+    _id: {
+        type: mongoose.Schema.Types.ObjectId,
+        default: mongoose.Types.ObjectId
+      },
     title: {type: String, required: true},
     artist: {type: String, required: true},
     label: {type: String, required: true},

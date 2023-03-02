@@ -3,20 +3,29 @@ import TracksListing from './TracksListing';
 import axios, { AxiosResponse } from 'axios'
 import { useEffect, useState } from "react";
 
+interface AlbumDetailsProps {
+    id?: string
+}
 
-
-const AlbumDetails = () => {
+const AlbumDetails: React.FC<AlbumDetailsProps> = ({ id }) => {
 
     const [albums, setAlbums] = useState<AxiosResponse | null | any | void>(null);
 
     useEffect(() => {
 
-        const fetchAlbums = async () => {
-            const albumData = await axios.get("http://localhost:8080/api/v1/album");
-            setAlbums(albumData);
+        const fetchAlbum = async () => {
+            try {
+                const albumData = await axios.get(`http://localhost:8080/api/v1/album/${id}`)
+                setAlbums(albumData);
+                
+                console.log("this is the ID:", id)
+            } catch (error) {
+                console.log(error);
+              }
         }
 
-        fetchAlbums();
+        fetchAlbum();
+        console.log(albums)
 
     }, [])
 
@@ -96,8 +105,8 @@ const AlbumDetails = () => {
 
                     {/* Beginning of tracks listing*/}
                     <>
-                    {albums && albums?.data.map((album: any) => ( 
-                        album.tracks.trackTitles.map((title: string, index: number) => (
+                    {albums && albums?.data?.map((album: any) => ( 
+                        album?.tracks?.trackTitles?.map((title: string, index: number) => (
                             <TracksListing number={index + 1} title={title} artist={album.artist} length={album.tracks.trackLengths[index]} />
                         ))
                     ))}

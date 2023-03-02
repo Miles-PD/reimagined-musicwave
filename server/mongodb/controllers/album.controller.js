@@ -13,10 +13,8 @@ cloudinary.config({
 })
 
 const getAllAlbums = async (req, res) => {
-
-
     try {
-        console.log(`Using collection: ${Album.collection.name}`);
+        
         const albums = await Album.find({})  //find all albums in db
 
         console.log(`Found ${albums.length} albums`);
@@ -24,10 +22,25 @@ const getAllAlbums = async (req, res) => {
         res.status(200).json(albums)
     } catch (error) {
         res.status(500).json({ msg: error.message })
-    }
+        }
 }; 
 
-const getAlbumDetail = async (req, res) => {}; 
+// get details for one album user has clicked
+const getAlbumDetail = async (req, res) => {
+    try {
+        console.log(`Using collection: ${Album.collection.name}`);
+        const searchedID = req.params.id;
+        const requestedAlbum = await Album.findById(searchedID)
+
+        console.log(`Found album by ID ${req.params.id}`);
+
+        res.status(200).json(requestedAlbum)
+        console.log(requestedAlbum)
+
+    } catch (error) {
+        res.status(500).json({ msg: error.message })
+        }
+}; 
 
 export {
     getAllAlbums,
