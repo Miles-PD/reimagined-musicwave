@@ -122,11 +122,10 @@ const AlbumDetails: React.FC<AlbumDetailsProps> = ({ id }) => {
 
                     {/* Beginning of tracks listing*/}
                     <>
-                    {albums && albums?.data?.map((album: any) => ( 
-                        album && album?.tracks?.trackTitles.map((title: string, index: number) => (
-                            <TracksListing number={index + 1} title={title} artist={album.artist} length={album.tracks.trackLengths[index]} />
+                    {albums && (albums.tracks && albums.tracks.trackTitles.map((title: string, index: number) => (
+                        <TracksListing number={index + 1} title={title} artist={albums.artist} length={albums.tracks.trackLengths[index]} />
                         ))
-                    ))}
+                    )}
                     </>
 
                 </div>
