@@ -7,31 +7,48 @@ interface AlbumDetailsProps {
     id?: string
 }
 
+type AlbumType = {
+    _id: string,
+    title: string,
+    artist: string,
+    label: string,
+    genre: string,
+    khz: number,
+    bitrate: number,
+    numTracks: number,
+    runtime: number,
+    parental: boolean,
+    tracks: {
+      trackTitles: string[],
+      trackLengths: string[]
+    }
+  }
+
 const AlbumDetails: React.FC<AlbumDetailsProps> = ({ id }) => {
 
-    const [albums, setAlbums] = useState<AxiosResponse | null | any | void>(null);
+    const [albums, setAlbums] = useState<AxiosResponse | AlbumType | null | any | void>([]);
 
     useEffect(() => {
 
         const fetchAlbum = async () => {
             try {
                 const albumData = await axios.get(`http://localhost:8080/api/v1/album/${id}`)
-                setAlbums(albumData);
                 
-                console.log("this is the ID:", id)
+                setAlbums(albumData.data);
             } catch (error) {
                 console.log(error);
               }
         }
 
         fetchAlbum();
-        console.log(albums)
+ 
+        
 
     }, [])
 
-
-
-
+    
+    console.log(albums)
+    
     return (
         <div className='block'>
             <div className="flex flex-row relative py-[15px] px-[50px] min-h-100">
@@ -106,7 +123,7 @@ const AlbumDetails: React.FC<AlbumDetailsProps> = ({ id }) => {
                     {/* Beginning of tracks listing*/}
                     <>
                     {albums && albums?.data?.map((album: any) => ( 
-                        album?.tracks?.trackTitles?.map((title: string, index: number) => (
+                        album && album?.tracks?.trackTitles.map((title: string, index: number) => (
                             <TracksListing number={index + 1} title={title} artist={album.artist} length={album.tracks.trackLengths[index]} />
                         ))
                     ))}

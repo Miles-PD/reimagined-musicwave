@@ -11,7 +11,7 @@ const AlbumListing = () => {
 
     return (
         
-        <AlbumDetails id={id} />
+        <AlbumDetails id={id ?? ""} />
     )
 }
 
