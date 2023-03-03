@@ -1,9 +1,11 @@
 import TracksListing from './TracksListing';
+import { Link } from 'react-router-dom';
 import axios, { AxiosResponse } from 'axios'
 import { useEffect, useState } from "react";
 
 interface AlbumDetailsProps {
-    id?: string
+    id?: string,
+    name?: string
 }
 
 type AlbumType = {
@@ -25,7 +27,7 @@ type AlbumType = {
 
 const AlbumDetails: React.FC<AlbumDetailsProps> = ({ id }) => {
 
-    const [albums, setAlbums] = useState<AxiosResponse | AlbumType | null | any | void>([]);
+    const [album, setAlbums] = useState<AxiosResponse | AlbumType | null | any | void>([]);
     const [artwork, setArtwork] = useState<AxiosResponse | null | any | void>([]);
 
     useEffect(() => {
@@ -59,7 +61,7 @@ const AlbumDetails: React.FC<AlbumDetailsProps> = ({ id }) => {
     }, [])
 
     
-    console.log(albums)
+    console.log(album)
     
     return (
         <div className='block'>
@@ -71,22 +73,24 @@ const AlbumDetails: React.FC<AlbumDetailsProps> = ({ id }) => {
 
                         {/* Left side album details */}
                         <h2 className="flex mb-[5px]">
-                            <span className="text-xl font-bold text-blue-600/100">Sgt. Pepper's Lonely Hearts Club Band (Deluxe Anniversary Edition)</span>
+                        <span className="text-xl font-bold text-blue-600/100">{album.title && album.title}</span>
                         </h2>
                         <p className="text-bold uppercase mb-[5px]"> 
-                            <a className='text-black'>the beatles</a>
+                        <Link to={`/artist/${album.artist}`} className='text-white'>
+                            {album.artist && String(album.artist).toUpperCase()}
+                        </Link>
                         </p>
                         <p className='text-[15px] m-0'>
-                            <a>label here</a>
+                        <a>{album.label && String(album.label)}</a>
                         </p>
                         <p className='text-[15px] m-0'>
-                            <a>genre here</a>
+                        <a>{album.genre && String(album.genre)}</a>
                         </p>
                         <p className='text-[15px] mb-2.5'>
-                            96kHz · 24bit
+                        {album.khz && String(album.khz)}kHz · {album.bitrate && String(album.bitrate)}bit
                         </p>
                         <p className='text-[13px] uppercase mb-2.5'>
-                            31 tracks · 100 minutes
+                        {album.tracks && String(album.numTracks)} tracks · {album.runtime && String(album.runtime)} minutes
                         </p>
 
                         {/* Right side items */}
@@ -134,8 +138,8 @@ const AlbumDetails: React.FC<AlbumDetailsProps> = ({ id }) => {
 
                     {/* Beginning of tracks listing*/}
                     <>
-                    {albums && (albums.tracks && albums.tracks.trackTitles.map((title: string, index: number) => (
-                        <TracksListing number={index + 1} title={title} artist={albums.artist} length={albums.tracks.trackLengths[index]} />
+                    {album && (album.tracks && album.tracks.trackTitles.map((title: string, index: number) => (
+                        <TracksListing key={index} number={index + 1} title={title} artist={album.artist} length={album.tracks.trackLengths[index]} />
                         ))
                     )}
                     </>

@@ -6,6 +6,7 @@ import * as dotenv from 'dotenv';
 
 import userRouter from './mongodb/routes/user.routes.js'
 import albumRouter from './mongodb/routes/album.routes.js'
+import artistRouter from './mongodb/routes/artist.routes.js'
 
 // ** configs
 dotenv.config();
@@ -22,6 +23,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/album', albumRouter);
+app.use('/api/v1/artist', artistRouter)
 
 const serverInit = async () => {
     try {

@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home'
 import Category from "./pages/Category";
 import AlbumListing from "./pages/AlbumListing";
+import Artist from "./pages/Artist";
 
 //bg-gradient-to-br from-[#43018f] to-[#df1b1b]
 
@@ -18,6 +19,7 @@ function App() {
           <div className="flex-1 h-fit pb-40">
             <Routes>
               <Route path="/album/:id" element={ <AlbumListing /> } />
+              <Route path="/artist/:name" element={ <Artist /> } />
               <Route path="/" element={ <Category /> } />
               
             </Routes>

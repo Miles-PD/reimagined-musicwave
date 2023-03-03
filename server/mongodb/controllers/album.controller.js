@@ -28,21 +28,43 @@ const getAllAlbums = async (req, res) => {
 // get details for one album user has clicked
 const getAlbumDetail = async (req, res) => {
     try {
-        console.log(`Using collection: ${Album.collection.name}`);
+        //console.log(`Using collection: ${Album.collection.name}`);
         const searchedID = req.params.id;
         const requestedAlbum = await Album.findById(searchedID)
 
-        console.log(`Found album by ID ${req.params.id}`);
+        //console.log(`Found album by ID ${req.params.id}`);
 
         res.status(200).json(requestedAlbum)
-        console.log(requestedAlbum)
+        //console.log(requestedAlbum)
 
     } catch (error) {
         res.status(500).json({ msg: error.message })
         }
 }; 
 
+const getAlbumArtwork = async (req, res) => {
+    try {
+        const albumID = req.params.id;
+
+        cloudinary.api.resource(albumID, { fields: "secure_url"}, (error, secure_url) => {
+            
+            if (error) {
+                console.log(error);
+                res.status(500).send('Failed to fetch image');
+              } else {
+                res.send(secure_url);
+              }
+        
+
+        });
+          
+    } catch (error) {
+        res.status(500).json({ msg: error.message })
+        }
+}
+
 export {
     getAllAlbums,
-    getAlbumDetail
+    getAlbumDetail,
+    getAlbumArtwork,
 }
