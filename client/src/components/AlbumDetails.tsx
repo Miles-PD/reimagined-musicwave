@@ -1,4 +1,3 @@
-import What from '../assets/whats.jpg'
 import TracksListing from './TracksListing';
 import axios, { AxiosResponse } from 'axios'
 import { useEffect, useState } from "react";
@@ -27,20 +26,33 @@ type AlbumType = {
 const AlbumDetails: React.FC<AlbumDetailsProps> = ({ id }) => {
 
     const [albums, setAlbums] = useState<AxiosResponse | AlbumType | null | any | void>([]);
+    const [artwork, setArtwork] = useState<AxiosResponse | null | any | void>([]);
 
     useEffect(() => {
 
         const fetchAlbum = async () => {
             try {
-                const albumData = await axios.get(`http://localhost:8080/api/v1/album/${id}`)
+                const albumData = await axios.get(`http://localhost:8080/api/v1/album/${id}`);
                 
                 setAlbums(albumData.data);
             } catch (error) {
-                console.log(error);
+                console.log("Error finding album details:", error);
+              }
+        }
+
+        const fetchArtwork = async () => {
+            try {
+                const artwork = await axios.get(`http://localhost:8080/api/v1/album/artwork/${id}`);
+
+                setArtwork(artwork.data.secure_url)
+
+            } catch (error) {
+                console.log("Error getting artwork:", error);
               }
         }
 
         fetchAlbum();
+        fetchArtwork();
  
         
 
@@ -52,7 +64,7 @@ const AlbumDetails: React.FC<AlbumDetailsProps> = ({ id }) => {
     return (
         <div className='block'>
             <div className="flex flex-row relative py-[15px] px-[50px] min-h-100">
-                <img alt="album_cover" src={What} className="flex basis-[300px] w-[300px] h-[300px] mr-[25px]" />
+                <img alt="album_cover" src={artwork} className="flex basis-[300px] w-[300px] h-[300px] mr-[25px]" />
 
                 <div className="relative w-full">
                     <div className="mr-[110px]">
