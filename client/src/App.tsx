@@ -4,6 +4,8 @@ import Home from './pages/Home'
 import Category from "./pages/Category";
 import AlbumListing from "./pages/AlbumListing";
 import Artist from "./pages/Artist";
+import Label from "./pages/Label";
+import Genre from "./pages/Genre";
 
 //bg-gradient-to-br from-[#43018f] to-[#df1b1b]
 
@@ -20,6 +22,8 @@ function App() {
             <Routes>
               <Route path="/album/:id" element={ <AlbumListing /> } />
               <Route path="/artist/:name" element={ <Artist /> } />
+              <Route path="/label/:label" element={ <Label /> } />
+              <Route path="/genre/:genre" element={ <Genre /> } />
               <Route path="/" element={ <Category /> } />
               
             </Routes>

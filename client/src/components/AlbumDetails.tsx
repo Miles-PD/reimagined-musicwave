@@ -76,15 +76,19 @@ const AlbumDetails: React.FC<AlbumDetailsProps> = ({ id }) => {
                         <span className="text-xl font-bold text-blue-600/100">{album.title && album.title}</span>
                         </h2>
                         <p className="text-bold uppercase mb-[5px]"> 
-                        <Link to={`/artist/${album.artist}`} className='text-white'>
-                            {album.artist && String(album.artist).toUpperCase()}
-                        </Link>
+                            <Link to={`/artist/${album.artist}`} className='text-white'>
+                                {album.artist && String(album.artist).toUpperCase()}
+                            </Link>
                         </p>
                         <p className='text-[15px] m-0'>
-                        <a>{album.label && String(album.label)}</a>
+                            <Link to={`/label/${album.label}`}>
+                                {album.label && String(album.label)}
+                            </Link>
                         </p>
                         <p className='text-[15px] m-0'>
-                        <a>{album.genre && String(album.genre)}</a>
+                            <Link to={`/genre/${album.genre}`}>
+                                {album.genre && String(album.genre)}
+                            </Link>
                         </p>
                         <p className='text-[15px] mb-2.5'>
                         {album.khz && String(album.khz)}kHz · {album.bitrate && String(album.bitrate)}bit
