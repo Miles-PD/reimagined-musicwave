@@ -1,16 +1,40 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 import { FaPlay } from 'react-icons/fa'
 
 interface TrackProps {
-    number: Number,
-    title: String,
-    artist: String,
-    length: String
+    number: number,
+    title: string,
+    artist: string,
+    length: string
 }
 
 const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) => {
 
     const [hovered, setHovered] = useState(false);
+    const [selectedTrack, setSelectedTrack] = useState<{ artist: string, title: string } | null>(null)
+
+    const handlePlay = (title: string, artist: string) => {
+        setSelectedTrack({ title, artist });
+      };
+
+    useEffect(() => {
+
+        const playSong = async () => {
+            if (selectedTrack) 
+            try {
+                const songURL = await axios.get(`http://localhost:8080/api/v1//search/req_song?q=${selectedTrack.title} ${selectedTrack.artist}`);
+                console.log(songURL)
+                
+                
+            } catch (error) {
+                console.log("Error finding album details:", error);
+              }
+        }
+
+    }, [selectedTrack])
+
+
 
     return (
         <>
@@ -27,7 +51,7 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
                                             {number && String(number)}
                                         </span>
                                         <span className={`icon-play absolute bottom-0 left-0 w-full h-full flex items-center justify-center opacity-${hovered ? '100' : '0'} transition-all ease-in-out duration-300`}>
-                                            <FaPlay />
+                                            <FaPlay onClick={() => handlePlay(title, artist)}/>
                                         </span>
                                     </div>
                                 </div>
