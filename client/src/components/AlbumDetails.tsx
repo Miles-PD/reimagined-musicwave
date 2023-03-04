@@ -125,7 +125,7 @@ const AlbumDetails: React.FC<AlbumDetailsProps> = ({ id }) => {
                                 <div className='flex justify-between items-center py-0 px-[15px]'>
                                     {/* Inner details of block*/}
                                     <div className='flex justify-between box-border items-center self-stretch w-full min-w-0 min-h-[50px] p-0 relative '>
-                                        <div className='w-full text-[12px] min-w-[35px] max-w-[35px] text-left ml-0  self-center shrink text-lg'>#</div>
+                                        <div className='w-full text-[12px] min-w-[35px] max-w-[35px] text-left ml-5 self-center shrink text-lg'>#</div>
                                         <div className='w-full text-[12px] pr-[10px] text-left whitespace-nowrap overflow-hidden text-ellipsis text-lg'>TITLE</div>
                                         <div className='w-full text-[12px] min-w-[200px] max-w-[200px] text-left overflow-hidden text-ellipsis whitespace-nowrap pr-[10px] text-lg'>ARTIST</div>
                                         <div className='w-fill text-[13px] min-w-[100px] max-w-[100px] text-left ml-[120px] shrink text-lg'>QUALITY</div>
