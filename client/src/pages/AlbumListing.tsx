@@ -9,8 +9,8 @@ import AlbumCard from "../components/AlbumCard";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode } from "swiper";
 
-import 'swiper/swiper.min.css';
-import 'swiper/css/freemode';
+import 'swiper/css';
+import 'swiper/css/free-mode';
 
 
 
@@ -27,7 +27,7 @@ const AlbumListing = () => {
             try {
                 const others = await axios.get(`http://localhost:8080/api/v1/artist/more/${id}`);
                 
-                setOtherAlbums(others.data);
+                setOtherAlbums(others);
             } catch (error) {
                 console.log("Error finding album details:", error);
               }
@@ -50,8 +50,8 @@ const AlbumListing = () => {
                     modules={[FreeMode]}
                     className="mt-4"
                 >
-                    {otherAlbums?.map((album: any, i: number) => {
-                        <SwiperSlide key={i}>
+                    {otherAlbums && otherAlbums?.data?.map((album: any, i: number) => (
+                        <SwiperSlide key={i} style={{ width: 'auto', height: 'auto'}} className="shadow-lg animate-slideright">
                             <AlbumCard 
                                 key={album._id}
                                 _id={album._id}
@@ -65,7 +65,7 @@ const AlbumListing = () => {
                                 runtime={album.runtime}
                             />
                         </SwiperSlide>
-                    })}
+                    ))}
                 </Swiper>
             </div>
         </>

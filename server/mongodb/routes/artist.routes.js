@@ -1,11 +1,13 @@
 import express from 'express';
 
 import {
-    getArtistDiscography
+    getArtistDiscography,
+    getArtistDiscogExceptCurrent
 } from '../controllers/artist.controller.js'
 
 const router = express.Router();
 
 router.route('/:name').get(getArtistDiscography)
+router.route('/more/:id').get(getArtistDiscogExceptCurrent)
 
 export default router;
