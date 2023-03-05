@@ -23,14 +23,17 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
         const playSong = async () => {
             if (selectedTrack) 
             try {
-                const songURL = await axios.get(`http://localhost:8080/api/v1/search/req_song?q=${selectedTrack.title} ${selectedTrack.artist}`);
+                const encodedTitle = encodeURI(selectedTrack.title.toLowerCase());
+                const encodedArtist = encodeURI(selectedTrack.artist.toLowerCase());
+                const songURL = await axios.get(`http://localhost:8080/api/v1/songdata/req_song/${encodedTitle}%20${encodedArtist}`);
                 console.log(songURL)
-                
-                
+
             } catch (error) {
                 console.log("Error finding album details:", error);
               }
         }
+
+        playSong();
 
     }, [selectedTrack])
 

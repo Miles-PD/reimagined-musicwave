@@ -9,7 +9,7 @@ import albumRouter from './mongodb/routes/album.routes.js'
 import artistRouter from './mongodb/routes/artist.routes.js'
 import labelRouter from './mongodb/routes/label.routes.js'
 import genreRouter from './mongodb/routes/genre.routes.js'
-import { searchForSong } from './youtube/controllers/videoSearch.controller.js';
+import songDataRouter from './youtube/routes/videoSearch.routes.js'
 
 // ** configs
 dotenv.config();
@@ -24,17 +24,12 @@ app.get('/', (req, res) => {
     res.send({ message: "Hello" })
 })
 
-app.get('/search/req_song/', async (req, res) => {
-    const query = req.query.q;
-    const results = await searchForSong(query);
-    res.json(results);
-  });
-
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/album', albumRouter);
 app.use('/api/v1/artist', artistRouter);
 app.use('/api/v1/label', labelRouter);
 app.use('/api/v1/genre', genreRouter);
+app.use('/api/v1/songdata', songDataRouter)
 
 const serverInit = async () => {
     try {

@@ -6,14 +6,14 @@ dotenv.config();
 
 const searchForSong = async (req, res) => {
     try {
-    const { artist, songTitle } = req.params.query;
+      const { search_term } = req.params;
 
     const response = await axios.get('https://www.googleapis.com/youtube/v3/search', {
       params: {
         key: process.env.YOUTUBE_API_KEY,
         type: 'video',
         part: 'id,snippet',
-        q: `${artist} ${songTitle}`,
+        q: search_term,
         maxResults: 1,
       },
     });
