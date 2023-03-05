@@ -46,11 +46,11 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
                                 onMouseEnter={() => setHovered(true)}
                                 onMouseLeave={() => setHovered(false)}>
                                 <div className={`w-full text-[12px] min-w-[35px] max-w-[35px] text-left ml-2 self-center shrink text-lg text-[#989898] relative`}>
-                                    <div className={`icon-container absolute top-0 left-0 w-full h-full flex items-center justify-center transition-all ease-in-out duration-300`}>
-                                        <span className={`icon-number absolute top-0 left-0 w-full h-full flex items-center justify-center opacity-${hovered ? '0' : '100'} transition-all ease-in-out duration-300`}>
-                                            {number && String(number)}
+                                    <div className={`absolute top-0 left-0 w-full h-full flex items-center justify-center transition-all ease-in-out duration-300`}>
+                                        <span style={{ opacity: hovered ? 0 : 100 }} className={`absolute top-0 left-0 w-full h-full flex items-center justify-center transition-all ease-in-out duration-300`} >
+                                            {number}
                                         </span>
-                                        <span className={`icon-play absolute bottom-0 left-0 w-full h-full flex items-center justify-center opacity-${hovered ? '100' : '0'} transition-all ease-in-out duration-300`}>
+                                        <span style={{ opacity: hovered ? 100 : 0 }} className={`absolute bottom-0 left-0 w-full h-full flex items-center justify-center transition-all ease-in-out duration-300`} >
                                             <FaPlay onClick={() => handlePlay(title, artist)}/>
                                         </span>
                                     </div>
