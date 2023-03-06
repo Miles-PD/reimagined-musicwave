@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { FaPlay } from 'react-icons/fa'
+import Player from './Player'
+
 
 
 interface TrackProps {
@@ -14,6 +16,8 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
 
     const [hovered, setHovered] = useState(false);
     const [selectedTrack, setSelectedTrack] = useState<{ artist: string, title: string } | null>(null)
+    const [youtubeURL, setYoutubeURL] = useState<string>('')
+    const [isPlaying, setIsPlaying] = useState<boolean>(false)
 
     const handlePlay = (title: string, artist: string) => {
         setSelectedTrack({ title, artist });
@@ -27,7 +31,8 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
                 const encodedTitle = encodeURI(selectedTrack.title.toLowerCase());
                 const encodedArtist = encodeURI(selectedTrack.artist.toLowerCase());
                 const songURL = await axios.get(`http://localhost:8080/api/v1/songdata/req_song/${encodedTitle}%20${encodedArtist}`);
-                console.log(songURL)
+                setYoutubeURL(songURL.data.url)
+                console.log(youtubeURL)
 
             } catch (error) {
                 console.log("Error finding album details:", error);

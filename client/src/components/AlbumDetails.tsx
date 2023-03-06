@@ -30,6 +30,7 @@ const AlbumDetails: React.FC<AlbumDetailsProps> = ({ id }) => {
     const [album, setAlbums] = useState<AxiosResponse | AlbumType | null | any | void>([]);
     const [artwork, setArtwork] = useState<AxiosResponse | null | any | void>([]);
 
+
     useEffect(() => {
 
         const fetchAlbum = async () => {
