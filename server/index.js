@@ -10,6 +10,7 @@ import artistRouter from './mongodb/routes/artist.routes.js'
 import labelRouter from './mongodb/routes/label.routes.js'
 import genreRouter from './mongodb/routes/genre.routes.js'
 import songDataRouter from './youtube/routes/videoSearch.routes.js'
+import streamRouter from './youtube/routes/streaming.routes.js'
 
 // ** configs
 dotenv.config();
@@ -30,6 +31,7 @@ app.use('/api/v1/artist', artistRouter);
 app.use('/api/v1/label', labelRouter);
 app.use('/api/v1/genre', genreRouter);
 app.use('/api/v1/songdata', songDataRouter)
+app.use('/api/v1/stream', streamRouter)
 
 const serverInit = async () => {
     try {

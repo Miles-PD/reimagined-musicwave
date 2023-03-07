@@ -15,15 +15,18 @@ interface TrackProps {
 
 const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) => {
 
-    const [hovered, setHovered] = useState(false);
-    const [selectedTrack, setSelectedTrack] = useState<{ artist: string, title: string } | null>(null)
+    // const [hovered, setHovered] = useState(false);
+    // const [selectedTrack, setSelectedTrack] = useState<{ artist: string, title: string } | null>(null)
     const [youtubeURL, setYoutubeURL] = useState<string>('')
-    const [audio, setAudio] = useState(new Audio());
     const [isPlaying, setIsPlaying] = useState<boolean>(false)
 
-    const handlePlay = (title: string, artist: string) => {
-        setSelectedTrack({ title, artist });
+    const handlePlay = (youtubeURL: string, songDuration: string) => {
+        //setSelectedTrack({ title, artist });
+
         console.log('clicked')
+        return (
+            <Player videoId={youtubeURL} songDuration={length} />
+        )
       };
 
       const getSongId = async (title: string, artist: string) => { 
@@ -33,12 +36,14 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
             //const songURL = await axios.get(`http://localhost:8080/api/v1/songdata/req_song/${encodedTitle}%20${encodedArtist}`);
         
             //setYoutubeURL(songURL?.data?.id)
-            setYoutubeURL('test')
+            setYoutubeURL('xYCntCKHy6I')
             
         } catch (error) {
             console.log("Error finding album details:", error);
           }
     }
+
+    
 
     console.log(youtubeURL)
 
@@ -58,6 +63,7 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
                                         </span>
                                         <span className={`absolute bottom-0 left-0 w-full h-full flex items-center justify-center transition-all ease-in-out duration-300 opacity-0 group-hover:opacity-100`} >
                                             <FaPlay onClick={() => getSongId(title, artist)} className="z-5"/>
+                                            <Player videoId={youtubeURL} songDuration={length} />
                                         </span>
                                     </div>
                                 </div>
@@ -68,10 +74,9 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
                                 <div className='min-w-[50px] max-w-[50px] shrink'></div>
                                 <div className='min-w-[30px] max-w-[30px] shrink'></div>
                             </div>
-
-                                </div>
-                            </li>
-                        </ul>           
+                        </div>
+                </li>
+            </ul>           
         </>
     )
 }
