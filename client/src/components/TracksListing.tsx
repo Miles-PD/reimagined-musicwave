@@ -12,36 +12,35 @@ interface TrackProps {
     length: string
 }
 
+
 const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) => {
 
     const [hovered, setHovered] = useState(false);
     const [selectedTrack, setSelectedTrack] = useState<{ artist: string, title: string } | null>(null)
     const [youtubeURL, setYoutubeURL] = useState<string>('')
+    const [audio, setAudio] = useState(new Audio());
     const [isPlaying, setIsPlaying] = useState<boolean>(false)
 
     const handlePlay = (title: string, artist: string) => {
         setSelectedTrack({ title, artist });
+        console.log('clicked')
       };
 
-    useEffect(() => {
+      const getSongId = async (title: string, artist: string) => { 
+        try {
+            const encodedTitle = encodeURI(title.toLowerCase());
+            const encodedArtist = encodeURI(artist.toLowerCase());
+            //const songURL = await axios.get(`http://localhost:8080/api/v1/songdata/req_song/${encodedTitle}%20${encodedArtist}`);
+        
+            //setYoutubeURL(songURL?.data?.id)
+            setYoutubeURL('test')
+            
+        } catch (error) {
+            console.log("Error finding album details:", error);
+          }
+    }
 
-        const playSong = async () => {
-            if (selectedTrack) 
-            try {
-                const encodedTitle = encodeURI(selectedTrack.title.toLowerCase());
-                const encodedArtist = encodeURI(selectedTrack.artist.toLowerCase());
-                const songURL = await axios.get(`http://localhost:8080/api/v1/songdata/req_song/${encodedTitle}%20${encodedArtist}`);
-                setYoutubeURL(songURL.data.url)
-                console.log(youtubeURL)
-
-            } catch (error) {
-                console.log("Error finding album details:", error);
-              }
-        }
-
-        playSong();
-
-    }, [selectedTrack])
+    console.log(youtubeURL)
 
 
 
@@ -51,16 +50,14 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
                 <li className='box-border'>
                      <div className='flex justify-between items-center py-0 px-[15px]'>
                         {/* Inner details of block*/}
-                            <div className={`group w-full flex justify-between box-border items-center rounded-lg hover:bg-[#4c426e] cursor-pointer self-stretch min-w-0 h-[50px] p-0 mb-2 relative`} 
-                                onMouseEnter={() => setHovered(true)}
-                                onMouseLeave={() => setHovered(false)}>
-                                <div className={`w-full text-[12px] min-w-[35px] max-w-[35px] text-left ml-2 self-center shrink text-lg text-[#989898] relative`}>
-                                    <div className={`absolute top-0 left-0 w-full h-full flex items-center justify-center transition-all ease-in-out duration-300`}>
-                                        <span style={{ opacity: hovered ? 0 : 100 }} className={`absolute top-0 left-0 w-full h-full flex items-center justify-center transition-all ease-in-out duration-300`} >
+                            <div className={`group w-full flex justify-between box-border items-center rounded-lg hover:bg-[#4c426e] cursor-pointer self-stretch min-w-0 h-[50px] p-0 mb-2 relative`} >
+                                <div className={`w-full text-[12px] min-w-[35px] max-w-[35px] text-left ml-2 self-center shrink text-lg text-[#989898] relative`} >
+                                    <div className={`absolute top-0 left-0 w-full h-full flex items-center justify-center transition-all ease-in-out duration-300`} >
+                                        <span className={`absolute top-0 left-0 w-full h-full flex items-center justify-center transition-all ease-in-out duration-300 opacity-100 group-hover:opacity-0`} >
                                             {number}
                                         </span>
-                                        <span style={{ opacity: hovered ? 100 : 0 }} className={`absolute bottom-0 left-0 w-full h-full flex items-center justify-center transition-all ease-in-out duration-300`} >
-                                            <FaPlay onClick={() => handlePlay(title, artist)}/>
+                                        <span className={`absolute bottom-0 left-0 w-full h-full flex items-center justify-center transition-all ease-in-out duration-300 opacity-0 group-hover:opacity-100`} >
+                                            <FaPlay onClick={() => getSongId(title, artist)} className="z-5"/>
                                         </span>
                                     </div>
                                 </div>
@@ -70,7 +67,6 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
                                 <div className='w-fill text-[13px] min-w-[50px] max-w-[50px] text-left shrink text-lg'>{length}</div>
                                 <div className='min-w-[50px] max-w-[50px] shrink'></div>
                                 <div className='min-w-[30px] max-w-[30px] shrink'></div>
-
                             </div>
 
                                 </div>

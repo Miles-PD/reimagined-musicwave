@@ -59,7 +59,7 @@ const AlbumDetails: React.FC<AlbumDetailsProps> = ({ id }) => {
  
         
 
-    }, [])
+    }, [id])
 
     
     console.log(album)

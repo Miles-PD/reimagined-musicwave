@@ -20,17 +20,32 @@ const searchForSong = async (req, res) => {
 
     // Get URL of first result
     const videoId = response.data.items[0].id.videoId;
-    const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+    //const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+
   
-    res.json({ url: videoUrl });
+    res.json({ id: videoId });
 
   } catch (error) {
     res.status(500).json({ msg: error.message })
     }
 }  
+
+const getSongDuration = async (req, res) => {
+  try {
+
+    const { videoId } = req.params;
+    const vidContent = await axios.get(`https://www.googleapis.com/youtube/v3/videos?id={${videoId}}&key={${process.env.YOUTUBE_API_KEY}}&part=contentDetails`);
+
+    const vidDuration = vidContent.duration;
+    res.json({ duration: vidDuration });
+
+
+  } catch (error) {
+    res.status(500).json({ msg: error.message })
+    }
+}
   
 export {
     searchForSong,
+    getSongDuration,
 };
-
-
