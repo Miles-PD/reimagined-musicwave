@@ -14,11 +14,17 @@ const getAudioStream = async (req, res) => {
         console.log(`Fetching data from YouTube for URL: ${url}`);
 
         
-          youtubedl(url, ['--format', 'bestaudio', '-o', '-'])
+          youtubedl(url, {
+            dumpSingleJson: true,
+            noCheckCertificates: true,
+            noWarnings: true,
+            preferFreeFormats: true,
+          })
           .then(
             (audioStream) => {
-              res.set("Content-Type", "audio/mpeg");
-              audioStream.pipe(res);
+
+              const audioURL = audioStream.formats[10].url;
+              res.json(audioStream)
             }
           )} catch(err)  {
                 console.log(err);
