@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import PlayOrPause from './PlayOrPause'
 import { FaPlay } from 'react-icons/fa'
 import Player from './Player'
 
@@ -17,16 +18,20 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
 
     // const [hovered, setHovered] = useState(false);
     // const [selectedTrack, setSelectedTrack] = useState<{ artist: string, title: string } | null>(null)
-    const [youtubeURL, setYoutubeURL] = useState<string>('')
+    const [youtubeURL, setYoutubeURL] = useState<string | null>(null)
     const [isPlaying, setIsPlaying] = useState<boolean>(false)
 
-    const handlePlay = (youtubeURL: string, songDuration: string) => {
+    const handlePlayClicked = (youtubeURL: string, songDuration: string) => {
+        
+
+    }
+
+    const handlePlay = () => {
         //setSelectedTrack({ title, artist });
+        getSongId(title, artist)
+        setIsPlaying(true)
 
         console.log('clicked')
-        return (
-            <Player videoId={youtubeURL} songDuration={length} />
-        )
       };
 
       const getSongId = async (title: string, artist: string) => { 
@@ -62,8 +67,12 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
                                             {number}
                                         </span>
                                         <span className={`absolute bottom-0 left-0 w-full h-full flex items-center justify-center transition-all ease-in-out duration-300 opacity-0 group-hover:opacity-100`} >
-                                            <FaPlay onClick={() => getSongId(title, artist)} className="z-5"/>
-                                            <Player videoId={youtubeURL} songDuration={length} />
+                                            {/* {<FaPlay onClick={() => getSongId(title, artist)} />} */}
+                                            <PlayOrPause handlePlay={handlePlay} />
+                                            {isPlaying && <Player 
+                                                            videoId={youtubeURL && youtubeURL} 
+                                                            songDuration={length}
+                                                             />}
                                         </span>
                                     </div>
                                 </div>

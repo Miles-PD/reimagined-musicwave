@@ -1,8 +1,8 @@
 import ReactPlayer from 'react-player/youtube'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 interface PlayerProps {
-    videoId: string,
+    videoId: string | null,
     songDuration: string,
     handlePlayClicked?: () => void,
     handlePauseClicked?: () => void,
@@ -10,20 +10,32 @@ interface PlayerProps {
 
 const Player: React.FC<PlayerProps> =  ({ videoId, songDuration, handlePlayClicked, handlePauseClicked  }) => {
 
-  const audioRef = useRef(null);
+    const audioRef = useRef<HTMLAudioElement>(null);
 
-  const [audio, setAudio] = useState(new Audio());
+    //const [audio, setAudio] = useState(new Audio());
 
     const timeArray = songDuration.split(':');
     const minutes = parseInt(timeArray[0]);
     const seconds = parseInt(timeArray[1]);
     const secondsFromStart = minutes * 60 + seconds; // convert to total seconds
 
-    const playAudio = async () => {
-      audio.pause();
-      audio.src = `http://localhost:8080/api/v1/stream/${videoId}`;
-      await audio.play();
-    };
+  
+
+      const audio = audioRef.current;
+      if (audio) {
+
+        const playAudio = async () => {
+          audio.pause();
+          audio.src = `http://localhost:8080/api/v1/stream/${videoId}`;
+          await audio.play();
+        };
+
+        playAudio();
+
+      }
+
+   
+
 
     return (
 
