@@ -6,35 +6,23 @@ dotenv.config();
 
 const getAudioStream = async (req, res) => {
    
+    try {
 
         const { videoId } = req.params;
-        const videoIdRegex = /^[A-Za-z0-9_-]{11}$/;
-
-        if (!videoIdRegex.test(videoId)) {
-            res.status(400).send('Invalid video ID');
-            return;
-          }
-
+  
         const url = `https://www.youtube.com/watch?v=${videoId}`;
         console.log(`Fetching data from YouTube for URL: ${url}`);
 
-        const audioOptions = {
-            format: "bestaudio",
-            noCheckCertificate: true,
-            noWarnings: true,
-            preferFreeFormats: true,
-            extractorArgs: ['-x', '--audio-format', 'mp3', '-q', '-o', '-', '--'],
-          };
         
-          youtubedl(url, audioOptions, { stdio: ["ignore", "pipe", "ignore"] }).then(
+          youtubedl(url, ['--format', 'bestaudio', '-o', '-'])
+          .then(
             (audioStream) => {
               res.set("Content-Type", "audio/mpeg");
-              console.log("logging")
               audioStream.pipe(res);
             }
-          ) .catch((err) => {
-                res.status(400).send(err);
-            });
+          )} catch(err)  {
+                console.log(err);
+            };
     };
 
 export {
