@@ -28,9 +28,10 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
     }
 
     const handlePlay = () => {
-        //setSelectedTrack({ title, artist });
+        
         getSongId(title, artist)
         setIsPlaying(true)
+        console.log(youtubeURL)
 
         console.log('clicked')
       };
