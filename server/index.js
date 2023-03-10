@@ -33,6 +33,13 @@ app.use('/api/v1/genre', genreRouter);
 app.use('/api/v1/songdata', songDataRouter)
 app.use('/api/v1/stream', streamRouter)
 
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+  });
+
 const serverInit = async () => {
     try {
         await connectDB(process.env.MONGODB_URL);

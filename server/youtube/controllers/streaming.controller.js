@@ -11,7 +11,7 @@ const getAudioStream = async (req, res) => {
         const { videoId } = req.params;
   
         const url = `https://www.youtube.com/watch?v=${videoId}`;
-        console.log(`Fetching data from YouTube for URL: ${url}`);
+        
 
         
           youtubedl(url, {
@@ -21,10 +21,27 @@ const getAudioStream = async (req, res) => {
             preferFreeFormats: true,
           })
           .then(
-            (audioStream) => {
+            (output) => {
 
-              const audioURL = audioStream.formats[10].url;
-              res.json(audioStream)
+              const sortBy = (key, ext) => {
+                return (a, b) => {
+                  if (a.ext === ext && b.ext === ext) {
+                    return (a[key] > b[key]) ? 1 : ((b[key] > a[key]) ? -1 : 0);
+                  } else if (a.ext === ext) {
+                    return -1;
+                  } else if (b.ext === ext) {
+                    return 1;
+                  } else {
+                    return 0;
+                  }
+                };
+              };
+              
+              const best = output.formats.sort(sortBy('tbr', 'm4a'))[0]; 
+               
+
+              //const audioURL = output.formats[10].url;
+              res.json({ streamURL: best.url })
             }
           )} catch(err)  {
                 console.log(err);

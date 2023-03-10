@@ -1,38 +1,44 @@
 import ReactPlayer from 'react-player/youtube'
 import { useState, useRef, useEffect } from 'react'
+import axios from 'axios'
 
 interface PlayerProps {
     videoId: string | null,
     songDuration: string,
+    isPlaying: boolean,
     handlePlayClicked?: () => void,
     handlePauseClicked?: () => void,
 }
 
-const Player: React.FC<PlayerProps> =  ({ videoId, songDuration, handlePlayClicked, handlePauseClicked  }) => {
+const Player: React.FC<PlayerProps> =  ({ videoId, isPlaying, songDuration, handlePlayClicked, handlePauseClicked  }) => {
 
     const audioRef = useRef<HTMLAudioElement>(null);
 
-    //const [audio, setAudio] = useState(new Audio());
+    //const [obtainedStream, setObtainedStream] = useState<string>('');
 
     const timeArray = songDuration.split(':');
     const minutes = parseInt(timeArray[0]);
     const seconds = parseInt(timeArray[1]);
     const secondsFromStart = minutes * 60 + seconds; // convert to total seconds
 
-  
+    const audio = audioRef.current;
 
-      const audio = audioRef.current;
+    useEffect(() => {
+
       if (audio) {
 
         const playAudio = async () => {
-          audio.pause();
-          audio.src = `http://localhost:8080/api/v1/stream/${videoId}`;
-          await audio.play();
+          console.log('entered first time')
+          const stream = await axios.get(`http://localhost:8080/api/v1/stream/${videoId}`);
+          const obtainedStream = stream?.data?.streamURL
+          audio.src = obtainedStream;
+          audio.play();
         };
 
         playAudio();
 
       }
+    },[])
 
    
 
@@ -40,32 +46,15 @@ const Player: React.FC<PlayerProps> =  ({ videoId, songDuration, handlePlayClick
     return (
 
       <>
-        <audio ref={audioRef} style={{ display: 'none' }} />
+        <audio ref={audioRef} style={{ display: 'none' }}  />
 
       </>
-
-
-      //   <ReactPlayer
-      //       className="absolute top-2/4 left-2/4 "
-      //       url={youtubeLink}
-      //       origin="https://www.youtube.com"
-      //       controls={true}
-      //       volume={1}
-      //       muted={true}
-      //       autoPlay={true}
-      //       width='30%'
-      //       height='30%'
-      //       opts={{
-      //           playerVars: {
-      //             start: Math.floor(secondsFromStart / 4),
-      //             end: Math.floor(secondsFromStart / 4) + 30,
-      //             autoplay: 1,
-      //           },
-      //         }}
-      // />
    
     )
     
 }
 
 export default Player;
+
+      //             start: Math.floor(secondsFromStart / 4),
+      //             end: Math.floor(secondsFromStart / 4) + 30,

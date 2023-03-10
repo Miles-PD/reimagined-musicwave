@@ -18,8 +18,9 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
 
     // const [hovered, setHovered] = useState(false);
     // const [selectedTrack, setSelectedTrack] = useState<{ artist: string, title: string } | null>(null)
-    const [youtubeURL, setYoutubeURL] = useState<string | null>(null)
-    const [isPlaying, setIsPlaying] = useState<boolean>(false)
+    const [youtubeURL, setYoutubeURL] = useState<string | null>(null);
+    const [activeURL, setActiveURL] = useState<string | null>(null);
+    const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
     const handlePlayClicked = (youtubeURL: string, songDuration: string) => {
         
@@ -50,7 +51,7 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
 
     
 
-    console.log(youtubeURL)
+    
 
 
 
@@ -68,9 +69,10 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
                                         </span>
                                         <span className={`absolute bottom-0 left-0 w-full h-full flex items-center justify-center transition-all ease-in-out duration-300 opacity-0 group-hover:opacity-100`} >
                                             {/* {<FaPlay onClick={() => getSongId(title, artist)} />} */}
-                                            <PlayOrPause handlePlay={handlePlay} />
+                                            <PlayOrPause handlePlay={handlePlay} isPlaying={isPlaying} />
                                             {isPlaying && <Player 
-                                                            videoId={youtubeURL && youtubeURL} 
+                                                            videoId={youtubeURL && youtubeURL}
+                                                            isPlaying={isPlaying}
                                                             songDuration={length}
                                                              />}
                                         </span>
