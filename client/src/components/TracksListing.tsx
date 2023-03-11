@@ -52,7 +52,7 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
             //const songURL = await axios.get(`http://localhost:8080/api/v1/songdata/req_song/${encodedTitle}%20${encodedArtist}`);
         
             //setYoutubeURL(songURL?.data?.id)
-            youtubeURLRef.current = 'eA8zugz6G9c'
+            youtubeURLRef.current = 'kUq6L6274O0'
             
         } catch (error) {
             console.log("Error finding album details:", error);
@@ -80,11 +80,11 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
                                         <span className={`absolute bottom-0 left-0 w-full h-full flex items-center justify-center transition-all ease-in-out duration-300 opacity-0 group-hover:opacity-100`} >
                                             {/* {<FaPlay onClick={() => getSongId(title, artist)} />} */}
                                             <PlayOrPause handlePlay={handlePlay} handlePause={handlePause} isPlaying={isPlaying} />
-                                            {/* <Player 
+                                            <Player 
                                                             videoId={youtubeURLRef.current}
                                                             isPlaying={isPlaying}
                                                             songDuration={length}
-                                                             /> */}
+                                                             />
                                         </span>
                                     </div>
                                 </div>
