@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react'
 import axios from 'axios'
 
 interface PlayerProps {
-    videoId: string | null,
+    videoId: string,
     songDuration: string,
     isPlaying: boolean,
     handlePlayClicked?: () => void,
@@ -15,6 +15,14 @@ const Player: React.FC<PlayerProps> =  ({ videoId, isPlaying, songDuration, hand
     const audioRef = useRef<HTMLAudioElement>(null);
 
     //const [obtainedStream, setObtainedStream] = useState<string>('');
+
+    const prevVideoId = useRef<string>('')
+
+    useEffect(() => {
+
+      prevVideoId.current = videoId
+
+    },[videoId])
 
     const timeArray = songDuration.split(':');
     const minutes = parseInt(timeArray[0]);
@@ -38,7 +46,7 @@ const Player: React.FC<PlayerProps> =  ({ videoId, isPlaying, songDuration, hand
         playAudio();
 
       }
-    },[])
+    },[videoId])
 
    
 
