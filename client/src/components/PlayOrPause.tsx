@@ -6,16 +6,22 @@ interface PoPProps {
     isPlaying?: boolean,
     activeURL?: string,
     requestedSong?: string,
-    handlePlay: () => void;
+    handlePlay: () => void,
+    handlePause: () => void
 }
 
-const PlayOrPause: React.FC<PoPProps> = ({ handlePlay, isPlaying, activeURL, requestedSong }) => (1 ? (
 
-            <FaPlay onClick={handlePlay} />
-    
-    ) : (
-            <FaPauseCircle />
-));
+
+const PlayOrPause: React.FC<PoPProps> = ({ handlePlay, handlePause, isPlaying, activeURL, requestedSong }) => {
+
+    console.log(isPlaying, 'inpop')
+
+    return (
+        isPlaying ? 
+            <FaPauseCircle onClick={handlePause} />
+            : <FaPlay onClick={handlePlay} />
+    )
+}
 
 
 export default PlayOrPause

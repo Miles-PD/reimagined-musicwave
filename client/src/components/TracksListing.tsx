@@ -35,8 +35,15 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
         console.log(youtubeURLRef)
 
         console.log('clicked')
-        console.log(isPlaying)
+        console.log(isPlaying, 'play')
       };
+
+      const handlePause = () => {
+        setIsPlaying(false)
+        console.log(isPlaying, 'pause')
+      }
+
+   
 
       const getSongId = async (title: string, artist: string) => { 
         try {
@@ -72,12 +79,12 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
                                         </span>
                                         <span className={`absolute bottom-0 left-0 w-full h-full flex items-center justify-center transition-all ease-in-out duration-300 opacity-0 group-hover:opacity-100`} >
                                             {/* {<FaPlay onClick={() => getSongId(title, artist)} />} */}
-                                            <PlayOrPause handlePlay={handlePlay} isPlaying={isPlaying} />
-                                            <Player 
+                                            <PlayOrPause handlePlay={handlePlay} handlePause={handlePause} isPlaying={isPlaying} />
+                                            {/* <Player 
                                                             videoId={youtubeURLRef.current}
                                                             isPlaying={isPlaying}
                                                             songDuration={length}
-                                                             />
+                                                             /> */}
                                         </span>
                                     </div>
                                 </div>
