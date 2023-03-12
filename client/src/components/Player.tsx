@@ -15,6 +15,7 @@ const Player: React.FC<PlayerProps> =  ({ videoId, isPlaying, songDuration, hand
     const playerRef = useRef<ReactPlayer>(null);
 
     const [obtainedStream, setObtainedStream] = useState<string>('');
+    const obtainedSteamRef = useRef<string>('');
 
     const prevVideoId = useRef<string>('');
 
@@ -45,7 +46,7 @@ const Player: React.FC<PlayerProps> =  ({ videoId, isPlaying, songDuration, hand
           try {
             console.log('entered first time');
             const stream = await axios.get(`http://localhost:8080/api/v1/stream/${videoId}`);
-            setObtainedStream(stream?.data?.streamURL);
+            obtainedSteamRef.current = stream?.data?.streamURL;
           } catch (err) {
             console.error('error getting stream:', err);
           }
@@ -58,11 +59,12 @@ const Player: React.FC<PlayerProps> =  ({ videoId, isPlaying, songDuration, hand
       }
     },[videoId]);
 
+
     return (
 
       <>
         
-        <ReactPlayer ref={playerRef} style={{ display: 'none' }} playing={isPlaying} />
+        <ReactPlayer ref={playerRef} url={obtainedSteamRef.current} style={{ display: 'none' }} playing={isPlaying} />
 
       </>
    
