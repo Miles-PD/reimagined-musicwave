@@ -8,15 +8,12 @@ interface PlayerProps {
     isPlaying: boolean,
 }
 
-const Player: React.FC<PlayerProps> =  ({ streamURL, isPlaying, songDuration }) => {
+const Player: React.FC<PlayerProps> =  ({ streamURL, isPlaying }) => {
 
     const playerRef = useRef<ReactPlayer>(null);
-    const prevStreamRef = useRef<string>('');
 
     const reactPlayer = playerRef.current;
     console.log(streamURL)
-
-  
 
 
 
@@ -26,7 +23,7 @@ const Player: React.FC<PlayerProps> =  ({ streamURL, isPlaying, songDuration }) 
 
       <>
         
-        <ReactPlayer ref={playerRef} url={streamURL} style={{ display: 'none' }} playing={isPlaying} preload='true' />
+        <ReactPlayer ref={playerRef} url={streamURL} style={{ display: 'none' }} playing={isPlaying} preload='true' buffersize={60} />
 
       </>
    
