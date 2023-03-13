@@ -21,12 +21,14 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
     //const [youtubeURL, setYoutubeURL] = useState<string | null>(null);
     const [activeURL, setActiveURL] = useState<string>('');
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
+    const titleRef = useRef<string>('')
+    const artistRef = useRef<string>('')
     const youtubeURLRef = useRef<string>('');
     
 
     const handlePlay = () => {
         
-        getSongId(title, artist)
+        const test = getSongId(title, artist)
         setIsPlaying(true)
         console.log(youtubeURLRef)
 
@@ -48,9 +50,9 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
             //const songURL = await axios.get(`http://localhost:8080/api/v1/songdata/req_song/${encodedTitle}%20${encodedArtist}`);
         
             //setYoutubeURL(songURL?.data?.id)
-            const obtained = 'kUq6L6274O0'
+            const obtained = 'u86hCir5I7g'
             if (youtubeURLRef.current === obtained) return;
-            youtubeURLRef.current = 'kUq6L6274O0'
+            youtubeURLRef.current = 'u86hCir5I7g'
              getSongURL(youtubeURLRef.current)
             
         } catch (error) {

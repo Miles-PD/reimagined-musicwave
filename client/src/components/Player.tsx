@@ -14,12 +14,10 @@ const Player: React.FC<PlayerProps> =  ({ streamURL, isPlaying, songDuration }) 
     const prevStreamRef = useRef<string>('');
 
     const reactPlayer = playerRef.current;
+    console.log(streamURL)
 
-    useEffect(() => {
+  
 
-      prevStreamRef.current = streamURL;
-
-    },[streamURL])
 
 
     if (!streamURL) return null
@@ -28,7 +26,7 @@ const Player: React.FC<PlayerProps> =  ({ streamURL, isPlaying, songDuration }) 
 
       <>
         
-        <ReactPlayer ref={playerRef} url={streamURL} style={{ display: 'none' }} playing={isPlaying} />
+        <ReactPlayer ref={playerRef} url={streamURL} style={{ display: 'none' }} playing={isPlaying} preload='true' />
 
       </>
    
