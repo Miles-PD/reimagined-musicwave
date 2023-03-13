@@ -19,14 +19,10 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
     // const [hovered, setHovered] = useState(false);
     // const [selectedTrack, setSelectedTrack] = useState<{ artist: string, title: string } | null>(null)
     //const [youtubeURL, setYoutubeURL] = useState<string | null>(null);
-    const [activeURL, setActiveURL] = useState<string | null>(null);
+    const [activeURL, setActiveURL] = useState<string>('');
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
     const youtubeURLRef = useRef<string>('');
-
-    const handlePlayClicked = (youtubeURL: string, songDuration: string) => {
-        
-
-    }
+    
 
     const handlePlay = () => {
         
@@ -52,12 +48,24 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
             //const songURL = await axios.get(`http://localhost:8080/api/v1/songdata/req_song/${encodedTitle}%20${encodedArtist}`);
         
             //setYoutubeURL(songURL?.data?.id)
+            const obtained = 'kUq6L6274O0'
+            if (youtubeURLRef.current === obtained) return;
             youtubeURLRef.current = 'kUq6L6274O0'
+             getSongURL(youtubeURLRef.current)
             
         } catch (error) {
             console.log("Error finding album details:", error);
           }
     }
+
+        const getSongURL = async (url: string) => {
+            console.log('getting song url...')
+            const stream = await axios.get(`http://localhost:8080/api/v1/stream/${url}`);
+            setActiveURL(stream?.data?.streamURL)
+        }
+    
+    
+
 
     
 
@@ -81,7 +89,7 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
                                             {/* {<FaPlay onClick={() => getSongId(title, artist)} />} */}
                                             <PlayOrPause handlePlay={handlePlay} handlePause={handlePause} isPlaying={isPlaying} />
                                             <Player 
-                                                            videoId={youtubeURLRef.current}
+                                                            streamURL={activeURL}
                                                             isPlaying={isPlaying}
                                                             songDuration={length}
                                                              />
