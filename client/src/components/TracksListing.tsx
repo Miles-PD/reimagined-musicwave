@@ -23,9 +23,6 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length, ac
     const [isActive, setIsActive] = useState<boolean>(false)
     const [trackProgress, setTrackProgress] = useState<number>(0);
 
-
-    const activeTitleRef = useRef<string>('');
-
     const youtubeURLRef = useRef<string>('');
     
 
@@ -61,7 +58,7 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length, ac
 
             youtubeURLRef.current = 'u86hCir5I7g'
 
-            console.log('notwok', activeTitleRef.current)
+            handleIsActive(titleSearch)
             
             getSongURL(youtubeURLRef.current) 
         } catch (error) {
