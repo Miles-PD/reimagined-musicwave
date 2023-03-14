@@ -10,11 +10,13 @@ interface TrackProps {
     number: number,
     title: string,
     artist: string,
-    length: string
+    length: string,
+    activeTitle: string,
+    handleIsActive: (title: string) => void,
 }
 
 
-const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) => {
+const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length, activeTitle, handleIsActive}) => {
 
     const [activeURL, setActiveURL] = useState<string>('');
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
@@ -23,12 +25,8 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
 
 
     const activeTitleRef = useRef<string>('');
-    const activeArtistRef = useRef<string>('');
-    const youtubeURLRef = useRef<string>('');
 
-    activeTitleRef.current = title
-    activeArtistRef.current = artist
-   
+    const youtubeURLRef = useRef<string>('');
     
 
     const handlePlay = () => {
@@ -50,15 +48,9 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
         setTrackProgress(progress);
       };
 
-      const handleActive = () => {
-        if (activeTitleRef.current === title) {
-            setIsActive(true)
-        }
-
-      }
-
     const getSongId = async (titleSearch: string, artistSearch: string) => { 
         try {
+            if (titleSearch === activeTitle) return
             const encodedTitle = encodeURI(titleSearch.toLowerCase());
             const encodedArtist = encodeURI(artistSearch.toLowerCase());
             //const songURL = await axios.get(`http://localhost:8080/api/v1/songdata/req_song/${encodedTitle}%20${encodedArtist}`);
@@ -69,8 +61,7 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
 
             youtubeURLRef.current = 'u86hCir5I7g'
 
-            activeTitleRef.current = titleSearch
-            activeArtistRef.current = artistSearch
+            console.log('notwok', activeTitleRef.current)
             
             getSongURL(youtubeURLRef.current) 
         } catch (error) {
@@ -83,6 +74,14 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
         const stream = await axios.get(`http://localhost:8080/api/v1/stream/${url}`);
         setActiveURL(stream?.data?.streamURL)
     }
+
+    useEffect(() => {
+        if (activeTitle === title) {
+          setIsActive(true)
+        } else {
+          setIsActive(false)
+        }
+      }, [activeTitle])
 
 
 
@@ -117,9 +116,10 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
                                     <div className='min-w-[50px] max-w-[50px] shrink'></div>
                                     <div className='min-w-[30px] max-w-[30px] shrink'></div>
 
+                                    {isActive && 
                                     <div className="absolute bottom-0 left-[7px] right-[7px] h-[1px] bg-gray-300 mt-0" style={{ padding: "0 100px" }}>
                                         <div className="absolute top-0 left-0 h-[1px] bg-red-500" style={{ width: `${trackProgress}%`, boxSizing: "border-box" }}></div>
-                                    </div>
+                                    </div>}
                             </div>
                         </div>
                 </li>

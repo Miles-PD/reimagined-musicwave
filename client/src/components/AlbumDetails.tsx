@@ -1,7 +1,7 @@
 import TracksListing from './TracksListing';
 import { Link } from 'react-router-dom';
 import axios, { AxiosResponse } from 'axios'
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 interface AlbumDetailsProps {
     id?: string,
@@ -29,6 +29,13 @@ const AlbumDetails: React.FC<AlbumDetailsProps> = ({ id }) => {
 
     const [album, setAlbums] = useState<AxiosResponse | AlbumType | null | any | void>([]);
     const [artwork, setArtwork] = useState<AxiosResponse | null | any | void>([]);
+
+    const [activeTitle, setActiveTitle] = useState<string>('')
+    const activeTitleRef = useRef<string>('');
+
+    const handleIsActive = (title: string) => {
+        setActiveTitle(title)
+    }
 
 
     useEffect(() => {
@@ -144,7 +151,16 @@ const AlbumDetails: React.FC<AlbumDetailsProps> = ({ id }) => {
                     {/* Beginning of tracks listing*/}
                     <>
                     {album && (album.tracks && album.tracks.trackTitles.map((title: string, index: number) => (
-                        <TracksListing key={index} number={index + 1} title={title} artist={album.artist} length={album.tracks.trackLengths[index]} />
+                        <TracksListing 
+                            key={index} 
+                            number={index + 1} 
+                            title={title} 
+                            artist={album.artist} 
+                            length={album.tracks.trackLengths[index]} 
+                            activeTitle={activeTitle}
+                            handleIsActive={handleIsActive}
+                             />
+                            
                         ))
                     )}
                     </>

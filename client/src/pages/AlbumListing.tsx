@@ -16,10 +16,11 @@ import 'swiper/css/free-mode';
 
 const AlbumListing = () => {
 
+  
     const [otherAlbums, setOtherAlbums] = useState<AxiosResponse | null | any | void>([]);
 
     const { id } = useParams<{ id?: string }>(); 
-    console.log(id)
+    //console.log(id)
 
     useEffect(() => {
 
