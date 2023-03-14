@@ -21,6 +21,8 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
     //const [youtubeURL, setYoutubeURL] = useState<string | null>(null);
     const [activeURL, setActiveURL] = useState<string>('');
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
+    const [trackProgress, setTrackProgress] = useState<number>(0);
+
     const titleRef = useRef<string>('')
     const artistRef = useRef<string>('')
     const youtubeURLRef = useRef<string>('');
@@ -41,7 +43,9 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
         console.log(isPlaying, 'pause')
       }
 
-   
+      const handleTrackProgress = (progress: number) => {
+        setTrackProgress(progress);
+      };
 
       const getSongId = async (title: string, artist: string) => { 
         try {
@@ -93,7 +97,7 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
                                                 <Player 
                                                                 streamURL={activeURL}
                                                                 isPlaying={isPlaying}
-                                                                songDuration={length}
+                                                                handleTrackProgress={handleTrackProgress}
                                                                 />
                                             </span>
                                         </div>
@@ -106,7 +110,7 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
                                     <div className='min-w-[30px] max-w-[30px] shrink'></div>
 
                                     <div className="absolute bottom-0 left-[7px] right-[7px] h-[1px] bg-gray-300 mt-0" style={{ padding: "0 100px" }}>
-                                        <div className="absolute top-0 left-0 h-[1px] bg-red-500" style={{ width: `${50}%`, boxSizing: "border-box" }}></div>
+                                        <div className="absolute top-0 left-0 h-[1px] bg-red-500" style={{ width: `${trackProgress}%`, boxSizing: "border-box" }}></div>
                                     </div>
                             </div>
                         </div>
