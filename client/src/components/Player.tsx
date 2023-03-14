@@ -5,10 +5,11 @@ import axios from 'axios'
 interface PlayerProps {
     streamURL: string,
     isPlaying: boolean,
-    handleTrackProgress: (progress: number) => void;
+    handleTrackProgress: (progress: number) => void,
+    isActive: boolean
 }
 
-const Player: React.FC<PlayerProps> =  ({ streamURL, isPlaying, handleTrackProgress }) => {
+const Player: React.FC<PlayerProps> =  ({ streamURL, isPlaying, handleTrackProgress, isActive }) => {
 
   const playerRef = useRef<ReactPlayer>(null);
   const [progress, setProgress] = useState<number>(0);

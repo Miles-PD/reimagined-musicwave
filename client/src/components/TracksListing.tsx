@@ -16,21 +16,24 @@ interface TrackProps {
 
 const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) => {
 
-    // const [hovered, setHovered] = useState(false);
-    // const [selectedTrack, setSelectedTrack] = useState<{ artist: string, title: string } | null>(null)
-    //const [youtubeURL, setYoutubeURL] = useState<string | null>(null);
     const [activeURL, setActiveURL] = useState<string>('');
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
+    const [isActive, setIsActive] = useState<boolean>(false)
     const [trackProgress, setTrackProgress] = useState<number>(0);
 
-    const titleRef = useRef<string>('')
-    const artistRef = useRef<string>('')
+
+    const activeTitleRef = useRef<string>('');
+    const activeArtistRef = useRef<string>('');
     const youtubeURLRef = useRef<string>('');
+
+    activeTitleRef.current = title
+    activeArtistRef.current = artist
+   
     
 
     const handlePlay = () => {
         
-        const test = getSongId(title, artist)
+        getSongId(title, artist)
         setIsPlaying(true)
         console.log(youtubeURLRef)
 
@@ -38,44 +41,48 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
         console.log(isPlaying, 'play')
       };
 
-      const handlePause = () => {
+    const handlePause = () => {
         setIsPlaying(false)
         console.log(isPlaying, 'pause')
       }
 
-      const handleTrackProgress = (progress: number) => {
+    const handleTrackProgress = (progress: number) => {
         setTrackProgress(progress);
       };
 
-      const getSongId = async (title: string, artist: string) => { 
+      const handleActive = () => {
+        if (activeTitleRef.current === title) {
+            setIsActive(true)
+        }
+
+      }
+
+    const getSongId = async (titleSearch: string, artistSearch: string) => { 
         try {
-            const encodedTitle = encodeURI(title.toLowerCase());
-            const encodedArtist = encodeURI(artist.toLowerCase());
+            const encodedTitle = encodeURI(titleSearch.toLowerCase());
+            const encodedArtist = encodeURI(artistSearch.toLowerCase());
             //const songURL = await axios.get(`http://localhost:8080/api/v1/songdata/req_song/${encodedTitle}%20${encodedArtist}`);
         
             //setYoutubeURL(songURL?.data?.id)
             const obtained = 'u86hCir5I7g'
             if (youtubeURLRef.current === obtained) return;
+
             youtubeURLRef.current = 'u86hCir5I7g'
-             getSongURL(youtubeURLRef.current)
+
+            activeTitleRef.current = titleSearch
+            activeArtistRef.current = artistSearch
             
+            getSongURL(youtubeURLRef.current) 
         } catch (error) {
             console.log("Error finding album details:", error);
           }
     }
 
-        const getSongURL = async (url: string) => {
-            console.log('getting song url...')
-            const stream = await axios.get(`http://localhost:8080/api/v1/stream/${url}`);
-            setActiveURL(stream?.data?.streamURL)
-        }
-    
-    
-
-
-    
-
-    
+    const getSongURL = async (url: string) => {
+        console.log('getting song url...')
+        const stream = await axios.get(`http://localhost:8080/api/v1/stream/${url}`);
+        setActiveURL(stream?.data?.streamURL)
+    }
 
 
 
@@ -97,7 +104,8 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length}) =
                                                 <Player 
                                                                 streamURL={activeURL}
                                                                 isPlaying={isPlaying}
-                                                                handleTrackProgress={handleTrackProgress}
+                                                                handleTrackProgress={handleTrackProgress} 
+                                                                isActive={isActive}      
                                                                 />
                                             </span>
                                         </div>
