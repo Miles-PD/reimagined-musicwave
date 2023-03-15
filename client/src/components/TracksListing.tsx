@@ -17,10 +17,10 @@ interface TrackProps {
 
 
 const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length, activeTitle, handleIsActive}) => {
+    console.log('activeTitle:', activeTitle);
 
     const [activeURL, setActiveURL] = useState<string>('');
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
-    const [isActive, setIsActive] = useState<boolean>(false)
     const [trackProgress, setTrackProgress] = useState<number>(0);
 
     const youtubeURLRef = useRef<string>('');
@@ -47,7 +47,7 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length, ac
 
     const getSongId = async (titleSearch: string, artistSearch: string) => { 
         try {
-            if (titleSearch === activeTitle) return
+            console.log('activetit:',activeTitle)
             const encodedTitle = encodeURI(titleSearch.toLowerCase());
             const encodedArtist = encodeURI(artistSearch.toLowerCase());
             //const songURL = await axios.get(`http://localhost:8080/api/v1/songdata/req_song/${encodedTitle}%20${encodedArtist}`);
@@ -73,14 +73,8 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length, ac
     }
 
     useEffect(() => {
-        if (activeTitle === title) {
-          setIsActive(true)
-        } else {
-          setIsActive(false)
-        }
-      }, [activeTitle])
-
-
+        console.log(activeTitle)
+    },[activeTitle])
 
     return (
         <>
@@ -88,7 +82,7 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length, ac
                 <li className='box-border'>
                      <div className='flex justify-between items-center py-0 px-[15px]'>
                         {/* Inner details of block*/}
-                            <div className={`group w-full flex justify-between box-border items-center rounded-lg hover:bg-[#4c426e] cursor-pointer self-stretch min-w-0 h-[50px] p-0 mb-0 relative`} >
+                            <div className={`group w-full flex justify-between box-border items-center rounded-lg hover:bg-[#4c426e] ${activeTitle === title ? 'flex bg-[#4c426e]' : '' } cursor-pointer self-stretch min-w-0 h-[50px] p-0 mb-0 relative`} >
                                     <div className={`w-full text-[12px] min-w-[35px] max-w-[35px] text-left ml-2 self-center shrink text-lg text-[#989898] relative`} >
                                         <div className={`absolute top-0 left-0 w-full h-full flex items-center justify-center transition-all ease-in-out duration-300`} >
                                             <span className={`absolute top-0 left-0 w-full h-full flex items-center justify-center transition-all ease-in-out duration-300 opacity-100 group-hover:opacity-0`} >
@@ -97,12 +91,12 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length, ac
                                             <span className={`absolute bottom-0 left-0 w-full h-full flex items-center justify-center transition-all ease-in-out duration-300 opacity-0 group-hover:opacity-100`} >
                                                 {/* {<FaPlay onClick={() => getSongId(title, artist)} />} */}
                                                 <PlayOrPause handlePlay={handlePlay} handlePause={handlePause} isPlaying={isPlaying} />
-                                                <Player 
+                                                {activeTitle === title &&<Player 
                                                                 streamURL={activeURL}
                                                                 isPlaying={isPlaying}
                                                                 handleTrackProgress={handleTrackProgress} 
-                                                                isActive={isActive}      
-                                                                />
+                                                                isActive={activeTitle === title ? true : false}      
+                                                                />}
                                             </span>
                                         </div>
                                     </div>
@@ -113,7 +107,7 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length, ac
                                     <div className='min-w-[50px] max-w-[50px] shrink'></div>
                                     <div className='min-w-[30px] max-w-[30px] shrink'></div>
 
-                                    {isActive && 
+                                    {(activeTitle === title) && 
                                     <div className="absolute bottom-0 left-[7px] right-[7px] h-[1px] bg-gray-300 mt-0" style={{ padding: "0 100px" }}>
                                         <div className="absolute top-0 left-0 h-[1px] bg-red-500" style={{ width: `${trackProgress}%`, boxSizing: "border-box" }}></div>
                                     </div>}

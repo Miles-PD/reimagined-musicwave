@@ -1,7 +1,7 @@
 import TracksListing from './TracksListing';
 import { Link } from 'react-router-dom';
 import axios, { AxiosResponse } from 'axios'
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 
 interface AlbumDetailsProps {
     id?: string,
@@ -33,9 +33,10 @@ const AlbumDetails: React.FC<AlbumDetailsProps> = ({ id }) => {
     const [activeTitle, setActiveTitle] = useState<string>('')
     const activeTitleRef = useRef<string>('');
 
-    const handleIsActive = (title: string) => {
-        setActiveTitle(title)
-    }
+    const handleIsActive = useCallback((title: string) => {
+        console.log("Setting active title to", title);
+        setActiveTitle(prevTitle => prevTitle === title ? '' : title)
+    }, [setActiveTitle])
 
 
     useEffect(() => {
@@ -156,7 +157,7 @@ const AlbumDetails: React.FC<AlbumDetailsProps> = ({ id }) => {
                             number={index + 1} 
                             title={title} 
                             artist={album.artist} 
-                            length={album.tracks.trackLengths[index]} 
+                            length={album.tracks.trackLengths[index]}
                             activeTitle={activeTitle}
                             handleIsActive={handleIsActive}
                              />
