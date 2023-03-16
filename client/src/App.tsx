@@ -6,8 +6,7 @@ import AlbumListing from "./pages/AlbumListing";
 import Artist from "./pages/Artist";
 import Label from "./pages/Label";
 import Genre from "./pages/Genre";
-
-//bg-gradient-to-br from-[#43018f] to-[#df1b1b]
+import Signup from "./components/Signup";
 
 function App() {
 
@@ -24,7 +23,8 @@ function App() {
               <Route path="/artist/:name" element={ <Artist /> } />
               <Route path="/label/:label" element={ <Label /> } />
               <Route path="/genre/:genre" element={ <Genre /> } />
-              <Route path="/" element={ <Category /> } />
+              <Route path="/categories" element={ <Category /> } />
+              <Route path="/" element={ <Signup /> } />
               
             </Routes>
           </div>

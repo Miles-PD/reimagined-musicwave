@@ -15,7 +15,6 @@ interface TrackProps {
     handleIsActive: (title: string) => void,
 }
 
-
 const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length, activeTitle, handleIsActive}) => {
 
     const [activeURL, setActiveURL] = useState<string>('');
@@ -78,8 +77,8 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length, ac
     }
 
     useEffect(() => {
-        console.log('the useeffect:',activeTitle)
-    },[activeTitle])
+        console.log('the useeffect:',trackProgress)
+    },[trackProgress])
 
     return (
         <>
