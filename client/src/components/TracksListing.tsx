@@ -27,12 +27,17 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length, ac
 
     const handlePlay = () => {
         
-        handleIsActive(title)
-        getSongId(title, artist)
-        setIsPlaying(true)
-        console.log(youtubeURLRef)
+        if (activeTitle === title) {
+            setIsPlaying(true)
+            return
+        }
 
-        console.log('clicked')
+        handleIsActive(title)
+
+        getSongId(title, artist)
+
+        setIsPlaying(true)
+        
         console.log(isPlaying, 'play')
       };
 
@@ -47,13 +52,13 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length, ac
 
     const getSongId = async (titleSearch: string, artistSearch: string) => { 
         try {
-            if (activeTitle === titleSearch) return
             const encodedTitle = encodeURI(titleSearch.toLowerCase());
             const encodedArtist = encodeURI(artistSearch.toLowerCase());
             //const songURL = await axios.get(`http://localhost:8080/api/v1/songdata/req_song/${encodedTitle}%20${encodedArtist}`);
         
             //setYoutubeURL(songURL?.data?.id)
             const obtained = 'u86hCir5I7g'
+            // if (obtained === youtubeURLRef.current) return
             
 
             youtubeURLRef.current = 'u86hCir5I7g'
@@ -89,14 +94,14 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length, ac
                                                 {number}
                                             </span>
                                             <span className={`absolute bottom-0 left-0 w-full h-full flex items-center justify-center transition-all ease-in-out duration-300 opacity-0 group-hover:opacity-100`} >
-                                                {/* {<FaPlay onClick={() => getSongId(title, artist)} />} */}
-                                                <PlayOrPause handlePlay={handlePlay} handlePause={handlePause} isPlaying={isPlaying} />
-                                                {activeTitle === title &&<Player 
+                                                <PlayOrPause activeTitle={activeTitle} title={title} handlePlay={handlePlay} handlePause={handlePause} isPlaying={isPlaying} />
+                                                <Player 
                                                                 streamURL={activeURL}
                                                                 isPlaying={isPlaying}
+                                                                trackProgress={trackProgress}
                                                                 handleTrackProgress={handleTrackProgress} 
                                                                 isActive={activeTitle === title ? true : false}      
-                                                                />}
+                                                                />
                                             </span>
                                         </div>
                                     </div>

@@ -6,13 +6,14 @@ interface PlayerProps {
     streamURL: string,
     isPlaying: boolean,
     handleTrackProgress: (progress: number) => void,
-    isActive: boolean
+    isActive: boolean,
+    trackProgress: number,
 }
 
-const Player: React.FC<PlayerProps> =  ({ streamURL, isPlaying, handleTrackProgress, isActive }) => {
+const Player: React.FC<PlayerProps> =  ({ streamURL, isPlaying, handleTrackProgress, trackProgress, isActive }) => {
 
   const playerRef = useRef<ReactPlayer>(null);
-  const [progress, setProgress] = useState<number>(0);
+  const [keep, setKeep] = useState<number>(trackProgress)
 
   const reactPlayer = playerRef.current;
 
@@ -23,7 +24,7 @@ const Player: React.FC<PlayerProps> =  ({ streamURL, isPlaying, handleTrackProgr
       
       const currentTime = reactPlayer.getCurrentTime();
       const duration = reactPlayer.getDuration();
-      const progress = (currentTime / duration) * 100;
+      const progress = (currentTime / duration) * 100
       handleTrackProgress(progress)
     }
   }

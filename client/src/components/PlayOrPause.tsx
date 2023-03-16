@@ -4,7 +4,8 @@ import { FaPlay, FaPauseCircle } from 'react-icons/fa'
 
 interface PoPProps {
     isPlaying?: boolean,
-    activeURL?: string,
+    activeTitle: string,
+    title: string,
     requestedSong?: string,
     handlePlay: () => void,
     handlePause: () => void
@@ -12,12 +13,12 @@ interface PoPProps {
 
 
 
-const PlayOrPause: React.FC<PoPProps> = ({ handlePlay, handlePause, isPlaying, activeURL, requestedSong }) => {
+const PlayOrPause: React.FC<PoPProps> = ({ handlePlay, handlePause, isPlaying, activeTitle, title }) => {
 
     console.log(isPlaying, 'inpop')
 
     return (
-        isPlaying ? 
+        isPlaying && activeTitle === title ? 
             <FaPauseCircle onClick={handlePause} />
             : <FaPlay onClick={handlePlay} />
     )
