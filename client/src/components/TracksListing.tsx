@@ -17,7 +17,6 @@ interface TrackProps {
 
 
 const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length, activeTitle, handleIsActive}) => {
-    console.log('activeTitle:', activeTitle);
 
     const [activeURL, setActiveURL] = useState<string>('');
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
@@ -28,6 +27,7 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length, ac
 
     const handlePlay = () => {
         
+        handleIsActive(title)
         getSongId(title, artist)
         setIsPlaying(true)
         console.log(youtubeURLRef)
@@ -47,18 +47,18 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length, ac
 
     const getSongId = async (titleSearch: string, artistSearch: string) => { 
         try {
-            console.log('activetit:',activeTitle)
+            if (activeTitle === titleSearch) return
             const encodedTitle = encodeURI(titleSearch.toLowerCase());
             const encodedArtist = encodeURI(artistSearch.toLowerCase());
             //const songURL = await axios.get(`http://localhost:8080/api/v1/songdata/req_song/${encodedTitle}%20${encodedArtist}`);
         
             //setYoutubeURL(songURL?.data?.id)
             const obtained = 'u86hCir5I7g'
-            if (youtubeURLRef.current === obtained) return;
+            
 
             youtubeURLRef.current = 'u86hCir5I7g'
 
-            handleIsActive(titleSearch)
+            console.log('setting active title...', titleSearch)
             
             getSongURL(youtubeURLRef.current) 
         } catch (error) {
@@ -73,7 +73,7 @@ const TracksListing: React.FC<TrackProps> = ({ number, title, artist, length, ac
     }
 
     useEffect(() => {
-        console.log(activeTitle)
+        console.log('the useeffect:',activeTitle)
     },[activeTitle])
 
     return (
