@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState, useEffect } from "react";
 
 import Logo from '../assets/icon.png'
 
@@ -38,14 +38,9 @@ const AuthModal = () => {
         return error;
     }
 
-    const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        try {
-            setFormErrors(handleValidation)
-            
-        } catch (error) {
-            console.log('Submission error:', error);
-        }
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setFormErrors(handleValidation());
     }
 
     const handleValueChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -79,9 +74,9 @@ const AuthModal = () => {
                                     <div className="flex flex-col">
 
                                     <div>
-                                    <label className="mb-1 text-xs">Username</label>
+                                    <label className="mb-1 text-xs">{formErrors.username}</label>
                                         <input
-                                            className="autofill:shadow-[inset_0_0_0px_1000px_rgb(255,255,0)] py-2 w-[350px] text-left bg-transparent caret-white border-b-[1px] border-transparent border-solid border-slate-400 transition-colors ease-in-out duration-300 focus:border-rose-300 focus:outline-none focus:bg-transparent focus:ring-transparent"
+                                            className="autofill:shadow-[inset_0_0_0px_1000px_rgb(255,255,0)] py-2 w-[395px] text-left bg-transparent caret-white border-b-[1px] border-transparent border-solid border-slate-400 transition-colors ease-in-out duration-300 focus:border-rose-300 focus:outline-none focus:bg-transparent focus:ring-transparent"
                                             type="text"
                                             id="username" 
                                             name="username"
@@ -91,13 +86,13 @@ const AuthModal = () => {
                                             required={true}
                                            
                                         />
-                                        <span>{formErrors.username}</span>
+                                        <span className="font-bold text-lg">{formErrors.username}</span>
                                     </div>
 
                                     <div>
-                                        <label className="mb-1 text-xs">Email address</label>
+                                        <label className="mb-1 text-xs">{'Email address'}</label>
                                         <input
-                                            className="autofill:shadow-[inset_0_0_0px_1000px_rgb(255,255,0)] py-2 w-[350px] text-left bg-transparent caret-white border-b-[1px] border-transparent border-solid border-slate-400 transition-colors ease-in-out duration-300 focus:border-rose-300 focus:outline-none focus:bg-transparent focus:ring-transparent"
+                                            className="autofill:shadow-[inset_0_0_0px_1000px_rgb(255,255,0)] py-2 w-[395px] text-left bg-transparent caret-white border-b-[1px] border-transparent border-solid border-slate-400 transition-colors ease-in-out duration-300 focus:border-rose-300 focus:outline-none focus:bg-transparent focus:ring-transparent"
                                             type="email"
                                             id="email" 
                                             name="email"
@@ -112,7 +107,7 @@ const AuthModal = () => {
                                     <div>
                                         <label className="mb-1 text-xs">Password</label>
                                         <input
-                                            className="autofill:shadow-[inset_0_0_0px_1000px_rgb(255,255,0)] py-2 w-[350px] text-left bg-transparent caret-white border-b-[1px] border-transparent border-solid border-slate-400 transition-colors ease-in-out duration-300 focus:border-rose-300 focus:outline-none focus:bg-transparent focus:ring-transparent"
+                                            className="autofill:shadow-[inset_0_0_0px_1000px_rgb(255,255,0)] py-2 w-[395px] text-left bg-transparent caret-white border-b-[1px] border-transparent border-solid border-slate-400 transition-colors ease-in-out duration-300 focus:border-rose-300 focus:outline-none focus:bg-transparent focus:ring-transparent"
                                             type="password"
                                             id="password" 
                                             name="password"
@@ -127,7 +122,7 @@ const AuthModal = () => {
                                     <div>
                                         <label className="mb-1 text-xs">Confirm password</label>
                                         <input
-                                            className="autofill:shadow-[inset_0_0_0px_1000px_rgb(255,255,0)] py-2 w-[350px] text-left bg-transparent caret-white border-b-[1px] border-transparent border-solid border-slate-400 transition-colors ease-in-out duration-300 focus:border-rose-300 focus:outline-none focus:bg-transparent focus:ring-transparent"
+                                            className="autofill:shadow-[inset_0_0_0px_1000px_rgb(255,255,0)] py-2 w-[395px] text-left bg-transparent caret-white border-b-[1px] border-transparent border-solid border-slate-400 transition-colors ease-in-out duration-300 focus:border-rose-300 focus:outline-none focus:bg-transparent focus:ring-transparent"
                                             type="password"
                                             id="password-check" 
                                             name="confirmPass"
@@ -139,7 +134,7 @@ const AuthModal = () => {
                                         />
                                     </div>
 
-                                        <button className="bg-sky-500 mt-5 rounded py-4">Submit</button>
+                                        <button className="bg-sky-500 mt-5 rounded py-4" type="submit">Submit</button>
                                     </div>
                                 </form>
                             </div>
