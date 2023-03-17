@@ -33,7 +33,7 @@ const AuthModal = () => {
 
         if (!formFields.username) error.username = "Username is required!";
         if (!formFields.email) error.email = "Email is required!";
-        if (!formFields.password) error.password = "Email is required!";
+        if (!formFields.password) error.password = "Password is required!";
 
         return error;
     }
@@ -70,7 +70,7 @@ const AuthModal = () => {
                     <div className="">
                         <div className="rounded flex justify-center bg-gray-800 mx-auto w-[475px] pt-8 sm:p-10">
                             <div className="">
-                                <form className="mb-5" onSubmit={handleSubmit}>
+                                <form className="mb-5" onSubmit={handleSubmit} noValidate>
                                     <div className="flex flex-col">
 
                                     <div>
