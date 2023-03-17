@@ -17,7 +17,7 @@ const Signup = () => {
 
                         <div className="text-center sm:mt-1">
                             <p className="text-2xl">
-                            Log in to manage your account
+                            Sign up
                             </p>
                         </div>
 
@@ -26,18 +26,22 @@ const Signup = () => {
 
                 <div className="mt-4">
                     <div className="">
-                        <div className="rounded flex justify-center bg-gray-800 mx-auto w-2/4 p-[40px] pt-8 sm:p-10">
-                            <form>
-                                <input
-                                    className="rounded"
-                                    type="email"
-                                    id="email" 
-                                    name="email"
-                                    placeholder="email"
-                                    required={true}
-
-                                />
-                            </form>
+                        <div className="rounded flex justify-center bg-gray-800 mx-auto w-[475px] pt-8 sm:p-10">
+                            <div className="">
+                                <form className="mb-5">
+                                    <div className=" relative">
+                                        <input
+                                            className="w-[350px] text-left bg-transparent caret-white border-b-[1px] border-green focus:outline-none focus:bg-transparent"
+                                            type="email"
+                                            id="email" 
+                                            name="email"
+                                            placeholder="Enter an email address"
+                                            required={true}
+                                            
+                                        />
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
