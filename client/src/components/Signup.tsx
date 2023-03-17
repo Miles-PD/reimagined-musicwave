@@ -29,15 +29,16 @@ const Signup = () => {
                         <div className="rounded flex justify-center bg-gray-800 mx-auto w-[475px] pt-8 sm:p-10">
                             <div className="">
                                 <form className="mb-5">
-                                    <div className=" relative">
+                                    <div className="flex flex-col">
+                                        <label className="mb-1 text-xs">Email</label>
                                         <input
-                                            className="w-[350px] text-left bg-transparent caret-white border-b-[1px] border-green focus:outline-none focus:bg-transparent"
+                                            className="autofill:shadow-[inset_0_0_0px_1000px_rgb(255,255,0)] py-2 w-[350px] text-left bg-transparent caret-white border-b-[1px] border-transparent border-solid border-slate-400 transition-colors ease-in-out duration-300 focus:border-rose-300 focus:outline-none focus:bg-transparent focus:ring-transparent"
                                             type="email"
                                             id="email" 
                                             name="email"
                                             placeholder="Enter an email address"
                                             required={true}
-                                            
+                                           
                                         />
                                     </div>
                                 </form>

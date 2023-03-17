@@ -46,4 +46,8 @@ module.exports = {
       'spline': ['Spline Sans', 'sans-serif'],
   },
   },
+  plugins: [
+    require('tailwindcss'),
+    require('autoprefixer'),
+  ],
 };
