@@ -9,6 +9,12 @@ interface FormFields {
     confirmPass: string;
   }
 
+  interface FormError {
+    username?: string;
+    email?: string;
+    password?: string;
+  }
+
 const defaultFormFields = {
     username: "",
     email: "",
@@ -18,9 +24,29 @@ const defaultFormFields = {
 
 const AuthModal = () => {
 
-    const [formFields, setFormFields] = useState<FormFields>(defaultFormFields)
+    const [formFields, setFormFields] = useState<FormFields>(defaultFormFields);
+    const [isSignUp, setIsSignUp] = useState<boolean>(true);
+    const [formErrors, setFormErrors] = useState<FormError>({});
 
-    console.log(formFields)
+    const handleValidation = () => {
+        let error: FormError = {};
+
+        if (!formFields.username) error.username = "Username is required!";
+        if (!formFields.email) error.email = "Email is required!";
+        if (!formFields.password) error.password = "Email is required!";
+
+        return error;
+    }
+
+    const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        try {
+            setFormErrors(handleValidation)
+            
+        } catch (error) {
+            console.log('Submission error:', error);
+        }
+    }
 
     const handleValueChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -37,8 +63,8 @@ const AuthModal = () => {
                         </div>
 
                         <div className="text-center sm:mt-1">
-                            <p className="text-2xl">
-                            Sign up
+                            <p className="text-2xl font-bold">
+                            {isSignUp ? 'Sign up' : "Login"}
                             </p>
                         </div>
 
@@ -49,14 +75,14 @@ const AuthModal = () => {
                     <div className="">
                         <div className="rounded flex justify-center bg-gray-800 mx-auto w-[475px] pt-8 sm:p-10">
                             <div className="">
-                                <form className="mb-5">
+                                <form className="mb-5" onSubmit={handleSubmit}>
                                     <div className="flex flex-col">
 
                                     <div>
                                     <label className="mb-1 text-xs">Username</label>
                                         <input
                                             className="autofill:shadow-[inset_0_0_0px_1000px_rgb(255,255,0)] py-2 w-[350px] text-left bg-transparent caret-white border-b-[1px] border-transparent border-solid border-slate-400 transition-colors ease-in-out duration-300 focus:border-rose-300 focus:outline-none focus:bg-transparent focus:ring-transparent"
-                                            type="username"
+                                            type="text"
                                             id="username" 
                                             name="username"
                                             placeholder="Enter a username"
@@ -65,13 +91,14 @@ const AuthModal = () => {
                                             required={true}
                                            
                                         />
+                                        <span>{formErrors.username}</span>
                                     </div>
 
                                     <div>
                                         <label className="mb-1 text-xs">Email address</label>
                                         <input
                                             className="autofill:shadow-[inset_0_0_0px_1000px_rgb(255,255,0)] py-2 w-[350px] text-left bg-transparent caret-white border-b-[1px] border-transparent border-solid border-slate-400 transition-colors ease-in-out duration-300 focus:border-rose-300 focus:outline-none focus:bg-transparent focus:ring-transparent"
-                                            type="Email"
+                                            type="email"
                                             id="email" 
                                             name="email"
                                             placeholder="Enter an email"
@@ -86,11 +113,26 @@ const AuthModal = () => {
                                         <label className="mb-1 text-xs">Password</label>
                                         <input
                                             className="autofill:shadow-[inset_0_0_0px_1000px_rgb(255,255,0)] py-2 w-[350px] text-left bg-transparent caret-white border-b-[1px] border-transparent border-solid border-slate-400 transition-colors ease-in-out duration-300 focus:border-rose-300 focus:outline-none focus:bg-transparent focus:ring-transparent"
-                                            type="Password"
+                                            type="password"
                                             id="password" 
                                             name="password"
                                             placeholder="Enter a password"
                                             value={formFields.password}
+                                            onChange={handleValueChange}
+                                            required={true}
+                                           
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="mb-1 text-xs">Confirm password</label>
+                                        <input
+                                            className="autofill:shadow-[inset_0_0_0px_1000px_rgb(255,255,0)] py-2 w-[350px] text-left bg-transparent caret-white border-b-[1px] border-transparent border-solid border-slate-400 transition-colors ease-in-out duration-300 focus:border-rose-300 focus:outline-none focus:bg-transparent focus:ring-transparent"
+                                            type="password"
+                                            id="password-check" 
+                                            name="confirmPass"
+                                            placeholder="Confirm password"
+                                            value={formFields.confirmPass}
                                             onChange={handleValueChange}
                                             required={true}
                                            
