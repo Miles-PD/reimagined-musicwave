@@ -1,10 +1,31 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 import Logo from '../assets/icon.png'
 
-const Signup = () => {
+interface FormFields {
+    username: string;
+    email: string;
+    password: string;
+    confirmPass: string;
+  }
 
-    const [email, setEmail] = useState<string>('')
+const defaultFormFields = {
+    username: "",
+    email: "",
+    password: "",
+    confirmPass: "",
+}
+
+const AuthModal = () => {
+
+    const [formFields, setFormFields] = useState<FormFields>(defaultFormFields)
+
+    console.log(formFields)
+
+    const handleValueChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setFormFields({...formFields, [name]: value});
+    };
 
     return (
         <div className="flex grow justify-center">
@@ -30,16 +51,53 @@ const Signup = () => {
                             <div className="">
                                 <form className="mb-5">
                                     <div className="flex flex-col">
-                                        <label className="mb-1 text-xs">Email</label>
+
+                                    <div>
+                                    <label className="mb-1 text-xs">Username</label>
                                         <input
                                             className="autofill:shadow-[inset_0_0_0px_1000px_rgb(255,255,0)] py-2 w-[350px] text-left bg-transparent caret-white border-b-[1px] border-transparent border-solid border-slate-400 transition-colors ease-in-out duration-300 focus:border-rose-300 focus:outline-none focus:bg-transparent focus:ring-transparent"
-                                            type="email"
-                                            id="email" 
-                                            name="email"
-                                            placeholder="Enter an email address"
+                                            type="username"
+                                            id="username" 
+                                            name="username"
+                                            placeholder="Enter a username"
+                                            value={formFields.username}
+                                            onChange={handleValueChange}
                                             required={true}
                                            
                                         />
+                                    </div>
+
+                                    <div>
+                                        <label className="mb-1 text-xs">Email address</label>
+                                        <input
+                                            className="autofill:shadow-[inset_0_0_0px_1000px_rgb(255,255,0)] py-2 w-[350px] text-left bg-transparent caret-white border-b-[1px] border-transparent border-solid border-slate-400 transition-colors ease-in-out duration-300 focus:border-rose-300 focus:outline-none focus:bg-transparent focus:ring-transparent"
+                                            type="Email"
+                                            id="email" 
+                                            name="email"
+                                            placeholder="Enter an email"
+                                            value={formFields.email}
+                                            onChange={handleValueChange}
+                                            required={true}
+                                           
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="mb-1 text-xs">Password</label>
+                                        <input
+                                            className="autofill:shadow-[inset_0_0_0px_1000px_rgb(255,255,0)] py-2 w-[350px] text-left bg-transparent caret-white border-b-[1px] border-transparent border-solid border-slate-400 transition-colors ease-in-out duration-300 focus:border-rose-300 focus:outline-none focus:bg-transparent focus:ring-transparent"
+                                            type="Password"
+                                            id="password" 
+                                            name="password"
+                                            placeholder="Enter a password"
+                                            value={formFields.password}
+                                            onChange={handleValueChange}
+                                            required={true}
+                                           
+                                        />
+                                    </div>
+
+                                        <button className="bg-sky-500 mt-5 rounded py-4">Submit</button>
                                     </div>
                                 </form>
                             </div>
@@ -52,4 +110,4 @@ const Signup = () => {
 
 }
 
-export default Signup;
+export default AuthModal;
