@@ -1,5 +1,11 @@
 import express from 'express';
 import connectDB from './mongodb/connect.js';
+import passport from 'passport';
+import passportLocal from 'passport-local'
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
+import bcrypt from 'bcryptjs'
+
 import cors from 'cors';
 
 import * as dotenv from 'dotenv';
@@ -12,6 +18,8 @@ import genreRouter from './mongodb/routes/genre.routes.js'
 import songDataRouter from './youtube/routes/videoSearch.routes.js'
 import streamRouter from './youtube/routes/streaming.routes.js'
 
+const LocalStrategy = passportLocal.Strategy;
+
 // ** configs
 dotenv.config();
 
@@ -19,10 +27,14 @@ dotenv.config();
 const app = express();
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded());
-app.use(cors())
+app.use(cors());
+
+app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.get('/', (req, res) => {
-    res.send({ message: "Hello" })
+    res.send({ message: "Hello" });
 })
 
 app.use('/api/v1/users', userRouter);
@@ -43,9 +55,9 @@ app.use((req, res, next) => {
 const serverInit = async () => {
     try {
         await connectDB(process.env.MONGODB_URL);
-        app.listen(8080, console.log('server on 8080'))
+        app.listen(8080, console.log('server on 8080'));
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 }
 

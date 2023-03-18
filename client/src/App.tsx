@@ -6,7 +6,7 @@ import AlbumListing from "./pages/AlbumListing";
 import Artist from "./pages/Artist";
 import Label from "./pages/Label";
 import Genre from "./pages/Genre";
-import Signup from "./components/Signup";
+import AuthModal from "./components/AuthModal";
 
 function App() {
 
@@ -24,7 +24,7 @@ function App() {
               <Route path="/label/:label" element={ <Label /> } />
               <Route path="/genre/:genre" element={ <Genre /> } />
               <Route path="/categories" element={ <Category /> } />
-              <Route path="/" element={ <Signup /> } />
+              <Route path="/" element={ <AuthModal /> } />
               
             </Routes>
           </div>

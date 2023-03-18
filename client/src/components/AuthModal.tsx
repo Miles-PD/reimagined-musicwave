@@ -1,28 +1,30 @@
 import { ChangeEvent, FormEvent, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Logo from '../assets/icon.png'
+import axios from "axios";
+
 
 interface FormFields {
     username: string;
-    email: string;
     password: string;
     confirmPass: string;
   }
 
   interface FormError {
     username?: string;
-    email?: string;
     password?: string;
   }
 
 const defaultFormFields = {
     username: "",
-    email: "",
     password: "",
     confirmPass: "",
 }
 
 const AuthModal = () => {
+
+    let navigate = useNavigate()
 
     const [formFields, setFormFields] = useState<FormFields>(defaultFormFields);
     const [isSignUp, setIsSignUp] = useState<boolean>(true);
@@ -32,14 +34,21 @@ const AuthModal = () => {
         let error: FormError = {};
 
         if (!formFields.username) error.username = "Username is required!";
-        if (!formFields.email) error.email = "Email is required!";
+        if (formFields.username.length < 8) error.username = "Username must be at least 8 characters long."
         if (!formFields.password) error.password = "Password is required!";
 
         return error;
     }
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        try {
+            const response = await axios.post('http://localhost:8080/api/v1/users/signup', { formFields })
+            if (response.data) navigate ('/categories')
+        } catch (error) {
+            
+        }
         setFormErrors(handleValidation());
     }
 
@@ -74,7 +83,7 @@ const AuthModal = () => {
                                     <div className="flex flex-col">
 
                                     <div>
-                                    <label className="mb-1 text-xs">{formErrors.username}</label>
+                                    <label className={`mb-1 text-xs ${formErrors.username ? 'text-rose-700' : ''}`}>{formErrors.username ? formErrors.username : 'Username'}</label>
                                         <input
                                             className="autofill:shadow-[inset_0_0_0px_1000px_rgb(255,255,0)] py-2 w-[395px] text-left bg-transparent caret-white border-b-[1px] border-transparent border-solid border-slate-400 transition-colors ease-in-out duration-300 focus:border-rose-300 focus:outline-none focus:bg-transparent focus:ring-transparent"
                                             type="text"
@@ -86,26 +95,10 @@ const AuthModal = () => {
                                             required={true}
                                            
                                         />
-                                        <span className="font-bold text-lg">{formErrors.username}</span>
                                     </div>
 
                                     <div>
-                                        <label className="mb-1 text-xs">{'Email address'}</label>
-                                        <input
-                                            className="autofill:shadow-[inset_0_0_0px_1000px_rgb(255,255,0)] py-2 w-[395px] text-left bg-transparent caret-white border-b-[1px] border-transparent border-solid border-slate-400 transition-colors ease-in-out duration-300 focus:border-rose-300 focus:outline-none focus:bg-transparent focus:ring-transparent"
-                                            type="email"
-                                            id="email" 
-                                            name="email"
-                                            placeholder="Enter an email"
-                                            value={formFields.email}
-                                            onChange={handleValueChange}
-                                            required={true}
-                                           
-                                        />
-                                    </div>
-
-                                    <div>
-                                        <label className="mb-1 text-xs">Password</label>
+                                        <label className={`mb-1 text-xs ${formErrors.password ? 'text-rose-700' : ''}`}>{formErrors.password ? formErrors.password : "Password"}</label>
                                         <input
                                             className="autofill:shadow-[inset_0_0_0px_1000px_rgb(255,255,0)] py-2 w-[395px] text-left bg-transparent caret-white border-b-[1px] border-transparent border-solid border-slate-400 transition-colors ease-in-out duration-300 focus:border-rose-300 focus:outline-none focus:bg-transparent focus:ring-transparent"
                                             type="password"
