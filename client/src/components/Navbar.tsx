@@ -22,11 +22,11 @@ export const navbar_links = [
 
 
 const NavLinks: React.FC<IProps> = ({ handleClick }) => (
-    <div className="mt-10">
+    <div className="block relative my-0">
         {navbar_links.map((link) => (
             <NavLink key={link.name}  to={link.to} onClick={() => handleClick && handleClick}>
-                <div className="flex flex-row justify-start items-center my-8 text-sm font-medium text-gray-400 hover:text-cyan-400">
-                    <link.icon className="w-6 h-6 mr-2" />
+                <div className="inline-block h-8 text-sm font-medium text-gray-400 hover:text-cyan-400">
+                    <link.icon className="float-left no-underline p-2.5" />
                     {link.name}
                 </div>
             </NavLink>
@@ -41,12 +41,20 @@ const Navbar = () => {
 
     return (
         <>
-            <div className="block inset-x-0 top-0 md:flex w-screen h-[105px] bg-[#352768]">
+            <div className="block inset-x-0 top-0 md:flex flex-col w-screen h-[105px] bg-[#352768]">
                 <div className="relative align-baseline pt-0 inner md:px-12 lg:px-24 xl:px-32">
-                    
+                    <img src={Logo} alt="logo" className="h-12 object-contain" />
                 </div>
-                <img src={Logo} alt="logo" className="h-12 object-contain" />
-                
+           
+
+                <div className="relative align-baseline pt-0 inner md:px-12 lg:px-24 xl:px-32">
+                    <div className="relative">
+                        <div className="relative block">
+                            <NavLinks />
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <div className="absolute md:hidden block top-6 right-3">
