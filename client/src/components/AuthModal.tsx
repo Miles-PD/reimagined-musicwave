@@ -46,7 +46,7 @@ const AuthModal = () => {
         try {
             const response = await axios.post('http://localhost:8080/api/v1/users/signup', { formFields })
             if (response.data) console.log(response)
-            //navigate ('/categories')
+            navigate ('/categories')
         } catch (error) {
             
         }
