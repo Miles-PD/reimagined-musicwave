@@ -1,9 +1,6 @@
 import express from 'express';
 import connectDB from './mongodb/connect.js';
-import passport from 'passport';
-import passportLocal from 'passport-local'
 import cookieParser from 'cookie-parser';
-import session from 'express-session';
 import bcrypt from 'bcryptjs'
 
 import cors from 'cors';
@@ -20,7 +17,6 @@ import genreRouter from './mongodb/routes/genre.routes.js'
 import songDataRouter from './youtube/routes/videoSearch.routes.js'
 import streamRouter from './youtube/routes/streaming.routes.js'
 
-const LocalStrategy = passportLocal.Strategy;
 
 // ** configs
 dotenv.config();
@@ -32,47 +28,10 @@ app.use(express.urlencoded());
 app.use(cors());
 
 app.use(cookieParser());
-app.use(passport.initialize());
-app.use(passport.session());
-
-// Passport 
-passport.use(new LocalStrategy((username, password, done) => {
-    User.findOne({ username: username }, (err, user) => {
-      if (err) throw err;
-      if (!user) return done(null, false);
-      bcrypt.compare(password, user.password, (err, result) => {
-        if (err) throw err;
-        if (result === true) {
-          return done(null, user);
-        } else {
-          return done(null, false);
-        }
-      });
-    });
-  })
-  );
-  
-passport.serializeUser((user, cb) => {
-    cb(null, user._id);
-});
-  
-passport.deserializeUser((id, cb) => {
-    User.findOne({ _id: id }, (err, user) => {
-      const userInformation = {
-        username: user.username,
-        id: user._id
-      };
-      cb(err, userInformation);
-    });
-  });
 
 app.get('/', (req, res) => {
     res.send({ message: "Hello" });
 })
-
-app.post('/api/v1/login', passport.authenticate('local'), (req, res) => {
-    res.send('Auth successfull')
-  })
 
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/album', albumRouter);

@@ -8,7 +8,6 @@ import axios from "axios";
 interface FormFields {
     username: string;
     password: string;
-    confirmPass: string;
   }
 
   interface FormError {
@@ -19,7 +18,6 @@ interface FormFields {
 const defaultFormFields = {
     username: "",
     password: "",
-    confirmPass: "",
 }
 
 const AuthModal = () => {
@@ -43,9 +41,12 @@ const AuthModal = () => {
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
+        console.log(formFields)
+
         try {
             const response = await axios.post('http://localhost:8080/api/v1/users/signup', { formFields })
-            if (response.data) navigate ('/categories')
+            if (response.data) console.log(response)
+            //navigate ('/categories')
         } catch (error) {
             
         }
@@ -106,21 +107,6 @@ const AuthModal = () => {
                                             name="password"
                                             placeholder="Enter a password"
                                             value={formFields.password}
-                                            onChange={handleValueChange}
-                                            required={true}
-                                           
-                                        />
-                                    </div>
-
-                                    <div>
-                                        <label className="mb-1 text-xs">Confirm password</label>
-                                        <input
-                                            className="autofill:shadow-[inset_0_0_0px_1000px_rgb(255,255,0)] py-2 w-[395px] text-left bg-transparent caret-white border-b-[1px] border-transparent border-solid border-slate-400 transition-colors ease-in-out duration-300 focus:border-rose-300 focus:outline-none focus:bg-transparent focus:ring-transparent"
-                                            type="password"
-                                            id="password-check" 
-                                            name="confirmPass"
-                                            placeholder="Confirm password"
-                                            value={formFields.confirmPass}
                                             onChange={handleValueChange}
                                             required={true}
                                            
