@@ -1,4 +1,5 @@
-import Navbar from "./components/Navbar";
+// import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar/Navbar"
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home'
 import Category from "./pages/Category";
@@ -13,8 +14,8 @@ function App() {
   return (
     <div className="relative flex flex-col min-h-screen">
 
-      <div className="flex-1 bg-black text-white "> 
-          <div className="fixed">
+      <div className="flex-1 bg-black text-white ">
+          <div className="fixed z-10">
             <Navbar />
           </div>
         <div className="mt-[120px] flex-1 flex-grow flex-shrink px-6 hide-scrollbar flex xl:flex-row flex-col-reverse">
