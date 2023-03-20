@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import Searchbar from "./Searchbar";
 import { TfiHome } from 'react-icons/tfi'
 import { VscChromeClose } from 'react-icons/vsc'
 import { HiOutlineMenu } from 'react-icons/hi'
@@ -16,7 +17,7 @@ interface IProps {
 
 
 export const navbar_links = [
-    { name: 'Home', to: '/',  },
+    { name: 'Homeiswhern', to: '/',  },
     { name: 'Genres', to: '/test' }
 ]
 
@@ -25,11 +26,11 @@ const NavLinks: React.FC<IProps> = ({ handleClick }) => (
     <div className="block relative my-0">
         {navbar_links.map((link) => (
             <NavLink key={link.name}  to={link.to} onClick={() => handleClick && handleClick}>
-                <div className="m-0 p-[10px] hover:bg-rose-800 float-left aline-baseline inline-block text-m font-medium text-gray-400 hover:text-cyan-400">
+                <div className="m-0 p-[5px] hover:bg-rose-800 float-left aline-baseline inline-block text-m font-medium text-gray-400 hover:text-cyan-400">
                     <div className="px-5 float-left">
                         {link.name}
                     </div>
-                    <div className="float-left block align-middle p-1 ">
+                    <div className="float-left block align-middle p-1">
                         <CgChevronDown />
                     </div>
                 </div>
@@ -45,16 +46,19 @@ const Navbar = () => {
 
     return (
         <>
-            <div className="block inset-x-0 top-0 md:flex flex-col w-screen h-[100px] bg-[#352768]">
+            <div className="block inset-x-0 top-0 md:flex flex-col w-screen h-[102px] bg-[#352768]">
                 <div className="relative align-baseline pt-0 inner md:px-12 lg:px-24 xl:px-32">
                     <img src={Logo} alt="logo" className="h-12 object-contain" />
                 </div>
            
 
                 <div className="relative align-baseline pt-0 inner md:px-12 lg:px-24 xl:px-32">
-                    <div className="relative pt-2">
+                    <div className="relative pt-5">
                         <div className="relative block">
                             <NavLinks />
+                        </div>
+                        <div className="float-right">
+                            <Searchbar />
                         </div>
                     </div>
                 </div>
