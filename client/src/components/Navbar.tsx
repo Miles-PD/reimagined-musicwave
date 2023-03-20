@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { TfiHome } from 'react-icons/tfi'
 import { VscChromeClose } from 'react-icons/vsc'
 import { HiOutlineMenu } from 'react-icons/hi'
-import { CgMenuRight } from 'react-icons/cg'
+import { CgMenuRight, CgChevronDown } from 'react-icons/cg'
 
 
 import Logo from '../assets/icon.png'
@@ -16,8 +16,8 @@ interface IProps {
 
 
 export const navbar_links = [
-    { name: 'Home', to: '/', icon: TfiHome },
-    { name: 'Test', to: '/test', icon: TfiHome }
+    { name: 'Home', to: '/',  },
+    { name: 'Genres', to: '/test' }
 ]
 
 
@@ -25,9 +25,13 @@ const NavLinks: React.FC<IProps> = ({ handleClick }) => (
     <div className="block relative my-0">
         {navbar_links.map((link) => (
             <NavLink key={link.name}  to={link.to} onClick={() => handleClick && handleClick}>
-                <div className="inline-block h-8 text-sm font-medium text-gray-400 hover:text-cyan-400">
-                    <link.icon className="float-left no-underline p-2.5" />
-                    {link.name}
+                <div className="m-0 p-[10px] hover:bg-rose-800 float-left aline-baseline inline-block text-m font-medium text-gray-400 hover:text-cyan-400">
+                    <div className="px-5 float-left">
+                        {link.name}
+                    </div>
+                    <div className="float-left block align-middle p-1 ">
+                        <CgChevronDown />
+                    </div>
                 </div>
             </NavLink>
         ))}
@@ -41,14 +45,14 @@ const Navbar = () => {
 
     return (
         <>
-            <div className="block inset-x-0 top-0 md:flex flex-col w-screen h-[105px] bg-[#352768]">
+            <div className="block inset-x-0 top-0 md:flex flex-col w-screen h-[100px] bg-[#352768]">
                 <div className="relative align-baseline pt-0 inner md:px-12 lg:px-24 xl:px-32">
                     <img src={Logo} alt="logo" className="h-12 object-contain" />
                 </div>
            
 
                 <div className="relative align-baseline pt-0 inner md:px-12 lg:px-24 xl:px-32">
-                    <div className="relative">
+                    <div className="relative pt-2">
                         <div className="relative block">
                             <NavLinks />
                         </div>
