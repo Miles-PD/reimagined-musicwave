@@ -49,7 +49,7 @@ function Navbar() {
               onClick={closeMobileMenu}
             >
               Services 
-            </Link>
+            </Link><span><CgChevronDown /></span>
             {dropdown && <Dropdown />}
           </li>
           <li className='nav-item'>
@@ -78,11 +78,11 @@ function Navbar() {
             >
               Sign Up
             </Link>
+            <div className='pt-5'>
+              <Searchbar />
+            </div>
           </li>
         </ul>
-        <div className='pt-10'>
-          <Searchbar />
-        </div>
       </nav>
     </>
   );
