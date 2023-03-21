@@ -44,6 +44,7 @@ module.exports = {
     },
     fontFamily: {
       'spline': ['Spline Sans', 'sans-serif'],
+      'comfortaa': ['Comfortaa', 'cursive'],
   },
   },
   plugins: [

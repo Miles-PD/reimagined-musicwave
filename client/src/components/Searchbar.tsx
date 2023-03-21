@@ -21,7 +21,7 @@ const Searchbar = () => {
             <div className="flex flex-row justify-start items-center">
                 <BiSearchAlt className="w-5 h-5 ml-4" />
                 <input 
-                    className="flex-1 bg-transparent border-none outline-none placeholder-gray-500 text-base text-white"
+                    className="flex-1 bg-transparent border-none outline-none placeholder-gray-500 text-white"
                     name="search-field"
                     autoComplete="off"
                     id="search-field"

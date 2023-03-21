@@ -45,11 +45,11 @@ function Navbar() {
           >
             <Link
               to='/services'
-              className='nav-links'
+              className='nav-links flex'
               onClick={closeMobileMenu}
             >
-              Services 
-            </Link><span><CgChevronDown /></span>
+              Genre<span className='pl-2 pt-1'><CgChevronDown /></span>
+            </Link>
             {dropdown && <Dropdown />}
           </li>
           <li className='nav-item'>
@@ -78,7 +78,7 @@ function Navbar() {
             >
               Sign Up
             </Link>
-            <div className='pt-5'>
+            <div className='pt-[18px]'>
               <Searchbar />
             </div>
           </li>

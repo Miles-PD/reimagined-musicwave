@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="relative flex flex-col min-h-screen">
 
-      <div className="flex-1 bg-black text-white ">
+      <div className="flex-1 bg-[black] text-white ">
           <div className="fixed z-10">
             <Navbar />
           </div>
@@ -26,7 +26,7 @@ function App() {
                 <Route path="/label/:label" element={ <Label /> } />
                 <Route path="/genre/:genre" element={ <Genre /> } />
                 <Route path="/categories" element={ <Category /> } />
-                <Route path="/" element={ <AuthModal /> } />
+                <Route path="/" element={ <Home /> } />
                 
               </Routes>
             </div>
