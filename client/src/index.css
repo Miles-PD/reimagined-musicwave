@@ -1,3 +1,5 @@
+@import 
+
 @import url('https://fonts.googleapis.com/css2?family=Spline+Sans:wght@500&display=swap');
 
 @tailwind base;
@@ -10,3 +12,30 @@
     }
 }
 
+.swiper-button-prev {
+    background-image: url('./assets/icons8-back-to-50.png');
+    width: 5vh;
+    height: 5vh;
+}
+
+.swiper-button-next {
+    background-image: url('./assets/icons8-back-to-50-right.png');
+    width: 5vh;
+    height: 5vh;
+}
+
+
+  
+.swiper-button-prev,
+.swiper-button-next {
+    background-repeat: none;
+    background-size: contain;
+    background-position: center;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    display: none;
+}
+
+  

@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, EffectFade } from "swiper";
+import { Navigation, EffectFade, Autoplay } from "swiper";
 
 // Import Swiper styles
 import "swiper/css";
@@ -24,13 +24,14 @@ const Home = () => {
                 </div>
                 {/* Top album recc gfx */}
                 <div className="relative object-contain overflow-hidden">
-                    <div className="flex flex-row w-full h-96 bg-red-400">
+                    <div className="flex flex-row w-2/4 h-96 bg-red-400">
                      <div>
                         <Swiper 
                             className="float-left w-2/4 z-1 overflow-hidden"
                             navigation={true} 
-                            modules={[Navigation, EffectFade]}
+                            modules={[Navigation, EffectFade, Autoplay]}
                             slidesPerView={1}
+                            autoplay={{ delay: 5000 }}
                             loop
                             effect="fade"
                             width={696} // set a fixed width
