@@ -19,7 +19,7 @@ function App() {
             <Navbar />
           </div>
         <div className="mt-[120px] flex-1 flex-grow flex-shrink px-6 hide-scrollbar flex xl:flex-row flex-col-reverse">
-            <div className="flex-1 h-fit pb-40">
+            <div className="flex-1 h-fit ">
               <Routes>
                 <Route path="/album/:id" element={ <AlbumListing /> } />
                 <Route path="/artist/:name" element={ <Artist /> } />
