@@ -1,4 +1,14 @@
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, EffectFade } from "swiper";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/effect-fade";
+
+
 import igloo from '../assets/igloo.png'
+import test from '../assets/test2.png'
 
 const Home = () => {
 
@@ -15,31 +25,38 @@ const Home = () => {
                 {/* Top album recc gfx */}
                 <div className="relative object-contain overflow-hidden">
                     <div className="flex flex-row w-full h-96 bg-red-400">
-                        <div className="float-left w-2/4 bg-purple-400">
-                            <img src={igloo} className="h-full w-full object-none" />
+                     <div>
+                        <Swiper 
+                            className="float-left w-2/4 z-1 overflow-hidden"
+                            navigation={true} 
+                            modules={[Navigation, EffectFade]}
+                            slidesPerView={1}
+                            loop
+                            effect="fade"
+                            width={696} // set a fixed width
+                            height={384} // set a fixed height
+                            
+                            >
+                            <SwiperSlide key={0} className="overflow-hidden">
+                                <img src={igloo} className="h-full w-full object-none" />
+                            </SwiperSlide>
+                            <SwiperSlide key={1}>
+                                <img src={test} className="h-full w-full object-none" />
+                            </SwiperSlide>
+                        </Swiper>
                         </div>
 
-                        <section className='opacityOverlay group group-hover:relative'>
+                        <section className='opacityOverlay group group-hover:relative z-10'>
                             <div className="hidden absolute bottom-0 left-0 w-2/4 h-2/4 bg-black backdrop-blur-sm animate-slideup_faster opacity-75 group-hover:block"></div>
-                                <div className='opacity-0 p-3 absolute bottom-0 left-0 w-2/4 h-2/4 overflow-hidden group-hover:opacity-100'>
+                                <div className='opacity-0 p-3 absolute bottom-0 left-0 w-2/4 h-2/4 overflow-hidden group-hover:opacity-100 ease-in-out'>
                                     <p className='text-white pt-1 text-2xl'>
                                         A strong debut from Iglooghost
                                     </p>
                                     <p className='text-sm pt-2 pr-10'>
-                                    The debut album from Iglooghost from 2017 goes even further down that rabbit hole of wild genre melee with EDM, juke, J-Pop, chiptune and much more all counted as weapons in the Irish producer’s arsenal. The voracious postmodernism of Neō Wax Bloom would mean nothing, however, if Iglooghost wasn’t an immaculate curator as well as creator. The attention to detail of tracks like ‘White Gum’ and ‘Teal Yomi/Olivine’ recalls the legendary SOPHIE and labelmate Daedalus - bursting at the seams, every idea still manages to find its own triumphant space.
+                                    The debut album from Iglooghost 
                                     </p>
                                 </div>
                         </section>
-                        <div className="rightMostBox float-right w-2/4 bg-blue-300">
-                            <div className="containerForFour">
-                                <div className="w-2/4 h-[192px] bg-green-200">
-                                    gfgfgf
-                                </div>
-                                <div className="w-2/4 h-[192px] bg-green-200">
-                                    gfgfgfss
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
