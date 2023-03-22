@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="relative flex flex-col min-h-screen">
 
-      <div className="flex-1 bg-[black] text-white ">
+      <div className="flex-1 bg-[white] text-white ">
           <div className="fixed z-10">
             <Navbar />
           </div>

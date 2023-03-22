@@ -13,21 +13,23 @@ const Home = () => {
 
                 </div>
                 {/* Top album recc gfx */}
-                <div className="relative">
+                <div className="relative object-contain overflow-hidden">
                     <div className="flex flex-row w-full h-96 bg-red-400">
                         <div className="float-left w-2/4 bg-purple-400">
                             <img src={igloo} className="h-full w-full object-none" />
                         </div>
-                        <div className="absolute bottom-0 left-0 w-2/4 h-2/4 bg-black opacity-75"></div>
-                            <div className='p-3 absolute bottom-0 left-0 w-2/4 h-2/4 overflow-hidden'>
-                                <p className='text-white pt-1 text-2xl'>
-                                    A strong debut from Iglooghost
-                                </p>
-                                <p className='text-sm pt-2'>
-                                The debut album from Iglooghost from 2017 goes even further down that rabbit hole of wild genre melee with EDM, juke, J-Pop, chiptune and much more all counted as weapons in the Irish producer’s arsenal. The voracious postmodernism of Neō Wax Bloom would mean nothing, however, if Iglooghost wasn’t an immaculate curator as well as creator. The attention to detail of tracks like ‘White Gum’ and ‘Teal Yomi/Olivine’ recalls the legendary SOPHIE and labelmate Daedalus - bursting at the seams, every idea still manages to find its own triumphant space.
-                                </p>
-                            </div>
-                        
+
+                        <section className='opacityOverlay group group-hover:relative'>
+                            <div className="hidden absolute bottom-0 left-0 w-2/4 h-2/4 bg-black backdrop-blur-sm animate-slideup_faster opacity-75 group-hover:block"></div>
+                                <div className='opacity-0 p-3 absolute bottom-0 left-0 w-2/4 h-2/4 overflow-hidden group-hover:opacity-100'>
+                                    <p className='text-white pt-1 text-2xl'>
+                                        A strong debut from Iglooghost
+                                    </p>
+                                    <p className='text-sm pt-2 pr-10'>
+                                    The debut album from Iglooghost from 2017 goes even further down that rabbit hole of wild genre melee with EDM, juke, J-Pop, chiptune and much more all counted as weapons in the Irish producer’s arsenal. The voracious postmodernism of Neō Wax Bloom would mean nothing, however, if Iglooghost wasn’t an immaculate curator as well as creator. The attention to detail of tracks like ‘White Gum’ and ‘Teal Yomi/Olivine’ recalls the legendary SOPHIE and labelmate Daedalus - bursting at the seams, every idea still manages to find its own triumphant space.
+                                    </p>
+                                </div>
+                        </section>
                         <div className="rightMostBox float-right w-2/4 bg-blue-300">
                             <div className="containerForFour">
                                 <div className="w-2/4 h-[192px] bg-green-200">

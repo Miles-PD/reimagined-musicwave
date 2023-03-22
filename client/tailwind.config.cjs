@@ -8,6 +8,7 @@ module.exports = {
       },
       animation: {
         slideup: 'slideup 1s ease-in-out',
+        slideup_faster: 'slideup_faster 200ms linear',
         slidedown: 'slidedown 1s ease-in-out',
         slideleft: 'slideleft 1s ease-in-out',
         slideright: 'slideright 1s ease-in-out',
@@ -22,6 +23,10 @@ module.exports = {
         slideup: {
           from: { opacity: 0, transform: 'translateY(25%)' },
           to: { opacity: 1, transform: 'none' },
+        },
+        slideup_faster: {
+          from: { opacity: 0.75, transform: 'translateY(100%)' },
+          to: { opacity: 0.75, transform: 'none' },
         },
         slidedown: {
           from: { opacity: 0, transform: 'translateY(-25%)' },
