@@ -13,7 +13,7 @@
 
 .swiper-button-prev {
     position: absolute;
-    z-index: 100;
+    z-index: 11;
     background-image: url('./assets/icons8-back-to-50.png');
     width: 5vh;
     height: 5vh;
@@ -22,7 +22,7 @@
 
 .swiper-button-next {
     position: absolute;
-    z-index: 100;
+    z-index: 11;
     background-image: url('./assets/icons8-back-to-50-right.png');
     width: 5vh;
     height: 5vh;
