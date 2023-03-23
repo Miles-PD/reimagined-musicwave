@@ -9,6 +9,7 @@ import "swiper/css/effect-fade";
 
 import igloo from '../assets/igloo.png'
 import test from '../assets/test2.png'
+import aphex from '../assets/aphex.png'
 
 const Home = () => {
 
@@ -23,7 +24,7 @@ const Home = () => {
 
                 </div>
                 {/* Top album recc gfx */}
-                <div className="flex flex-row relative object-contain overflow-hidden">
+                <div className="flex flex-row w-full relative object-contain overflow-hidden">
                     <div className="flex flex-row w-2/4 h-96 bg-red-400">
                         <div className="w-full">
                             <Swiper 
@@ -50,7 +51,7 @@ const Home = () => {
                             <div className="absolute left-0 w-2/4 h-full group-hover:block z-2">
                                 <div className="hidden absolute bottom-0 left-0 w-full h-40 bg-black backdrop-blur-sm animate-slideup_faster opacity-75 group-hover:block" />
                             </div>
-                                <div className='opacity-0 px-3 pb-3 pt-8 absolute bottom-0 left-0 w-2/4 h-2/4 overflow-hidden group-hover:opacity-100 ease-in-out'>
+                                <div className='opacity-0 px-3 pb-3 pt-10 absolute bottom-0 left-0 w-2/4 h-2/4 overflow-hidden group-hover:opacity-100 ease-in-out'>
                                     <p className='text-white pt-1 text-2xl'>
                                         A strong debut from Iglooghost
                                     </p>
@@ -60,11 +61,24 @@ const Home = () => {
                                 </div>
                         </section>
                     </div>
-                    <div className="absolute right-0 float-right w-2/4 bg-green-400">
-                        <div className="w-1/4 h-full bg-red-200">test</div>
+                    
+                    <div className="grid grid-cols-2 grid-rows-2 w-2/4 h-96">
+                        <div className=" pl-2 pb-2">
+                            <img src={aphex} className="object-cover w-full h-full" alt="" />
+                        </div>
+                        <div className=" pl-2 pb-2">
+                            <img src={aphex} className="object-cover w-full h-full" alt="" />
+                        </div>
+                        <div className=" pl-2">
+                            <img src={aphex} className="object-cover w-full h-full" alt="" />
+                        </div>
+                        <div className=" pl-2">
+                            <img src={aphex} className="object-cover w-full h-full" alt="" />
+                        </div>
                     </div>
                 </div>
             </div>
+
         </>
     )
 }
