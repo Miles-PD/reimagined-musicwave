@@ -17,14 +17,24 @@ const Home = () => {
         <>
             <div className="flex flex-col px-[240px]">
 
-                <div className='textbox w-full h-16 flex flex-row items-center '>
-                    <h1 className='flex justify-start '>
-                    Latest arrivals
-                    </h1>
+                <section className="flex flex-row">
+                    <div className='w-2/4 h-16 flex flex-row items-center '>
+                        <h1 className='flex justify-start '>
+                        Latest arrivals
+                        </h1>
 
-                </div>
+                    </div>
+
+                    <div className='w-2/4 h-16 pl-2 flex flex-row items-center '>
+                        <h1 className='flex justify-start '>
+                        Trending artists
+                        </h1>
+
+                    </div>
+                </section>
+
                 {/* Top album recc gfx */}
-                <div className="flex flex-row w-full relative object-contain overflow-hidden">
+                <div className="flex flex-row w-full relative object-contain overflow-hidden select-none cursor-pointer">
                     <div className="flex flex-row w-2/4 h-96 bg-red-400">
                         <div className="w-full">
                             <Swiper 
@@ -63,19 +73,29 @@ const Home = () => {
                     </div>
                     
                     <div className="grid grid-cols-2 grid-rows-2 w-2/4 h-96">
-                        <div className=" pl-2 pb-2">
+                        <div className="relative pl-2 pb-2">
                             <img src={aphex} className="object-cover w-full h-full" alt="" />
+                            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black" />
+                                <div className="inline-block box-border w-auto h-auto absolute bottom-4 left-5 text-left z-10">
+                                    <span className="text-gray-200 text-xl font-bold select-none">
+                                        Aphex Twin
+                                    </span>
+                                </div>
                         </div>
-                        <div className=" pl-2 pb-2">
+                        <div className="relative pl-2 pb-2">
                             <img src={aphex} className="object-cover w-full h-full" alt="" />
+                            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black" />
                         </div>
-                        <div className=" pl-2">
+                        <div className="relative pl-2">
                             <img src={aphex} className="object-cover w-full h-full" alt="" />
+                            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black" />
                         </div>
-                        <div className=" pl-2">
+                        <div className="relative pl-2">
                             <img src={aphex} className="object-cover w-full h-full" alt="" />
+                            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black" />
                         </div>
                     </div>
+                    
                 </div>
             </div>
 
