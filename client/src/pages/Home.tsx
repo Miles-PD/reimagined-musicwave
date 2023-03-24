@@ -1,5 +1,8 @@
+import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, EffectFade, Autoplay } from "swiper";
+
+import DisplayCards from "../components/DisplayCards";
 
 // Import Swiper styles
 import "swiper/css";
@@ -20,7 +23,7 @@ const Home = () => {
                 <section className="flex flex-row">
                     <div className='w-2/4 h-16 flex flex-row items-center '>
                         <h1 className='flex justify-start '>
-                        Latest arrivals
+                        New arrivals
                         </h1>
 
                     </div>
@@ -34,8 +37,8 @@ const Home = () => {
                 </section>
 
                 {/* Top album recc gfx */}
-                <div className="flex flex-row w-full relative object-contain overflow-hidden select-none cursor-pointer">
-                    <div className="flex flex-row w-2/4 h-96 bg-red-400">
+                <div className="flex flex-row w-full relative object-contain overflow-hidden select-none">
+                    <div className="flex flex-row w-2/4 h-96 bg-red-400 cursor-pointer">
                         <div className="w-full">
                             <Swiper 
                                 className="float-left w-full overflow-hidden"
@@ -97,6 +100,16 @@ const Home = () => {
                     </div>
                     
                 </div>
+
+                <section className="flex flex-row pb-6">
+                    <div className='w-full h-16 flex pt-8 flex-row items-center border-b-[1px] border-solid border-slate-400 '>
+                        <h1 className='flex justify-start text-xl'>
+                        New arrivals
+                        </h1>
+                    </div>
+                </section>
+
+                <DisplayCards />
             </div>
 
         </>

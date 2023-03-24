@@ -11,6 +11,10 @@
     }
 }
 
+body {
+    text-rendering: optimizeLegibility;
+  }
+
 .swiper-button-prev {
     position: absolute;
     z-index: 11;
